@@ -14,6 +14,7 @@ const pool = new Pool({
 
 const allowedOrigins = [
   "http://localhost:5173",
+  "https://www.allira.io",
   "https://allira-landing.vercel.app",
 ];
 
