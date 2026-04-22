@@ -1,4 +1,60 @@
+import { useState } from "react";
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
+
 export default function App() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    message: "",
+  });
+
+  const [status, setStatus] = useState("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setStatus("submitting");
+    setErrorMessage("");
+
+    try {
+      const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
+      const response = await fetch(`${API_BASE}/api/early-access`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Something went wrong.");
+      }
+
+      setStatus("success");
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        message: "",
+      });
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(error.message || "Failed to submit request.");
+    }
+  }
+
   return (
     <div
       style={{
@@ -369,22 +425,165 @@ export default function App() {
             and better role alignment from the start.
           </div>
 
-          <button
+          <div
             style={{
-              padding: "16px 24px",
-              borderRadius: "12px",
-              border: "none",
-              backgroundColor: "#4f7cff",
-              color: "white",
-              fontWeight: 700,
-              fontSize: "16px",
-              cursor: "pointer",
+              maxWidth: "720px",
+              margin: "0 auto",
+              background: "linear-gradient(180deg, #11182f 0%, #0d1428 100%)",
+              border: "1px solid rgba(255,255,255,0.08)",
+              borderRadius: "22px",
+              padding: "32px",
+              textAlign: "left",
             }}
           >
-            Get Early Access
-          </button>
+            <form onSubmit={handleSubmit}>
+              <div
+                style={{
+                  display: "grid",
+                  gap: "18px",
+                }}
+              >
+                <div>
+                  <label
+                    htmlFor="name"
+                    style={{
+                      display: "block",
+                      fontWeight: 600,
+                      marginBottom: "8px",
+                      color: "#d7deec",
+                    }}
+                  >
+                    Name
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    style={inputStyle}
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="email"
+                    style={{
+                      display: "block",
+                      fontWeight: 600,
+                      marginBottom: "8px",
+                      color: "#d7deec",
+                    }}
+                  >
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    style={inputStyle}
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="company"
+                    style={{
+                      display: "block",
+                      fontWeight: 600,
+                      marginBottom: "8px",
+                      color: "#d7deec",
+                    }}
+                  >
+                    Company
+                  </label>
+                  <input
+                    id="company"
+                    name="company"
+                    type="text"
+                    value={formData.company}
+                    onChange={handleChange}
+                    style={inputStyle}
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="message"
+                    style={{
+                      display: "block",
+                      fontWeight: 600,
+                      marginBottom: "8px",
+                      color: "#d7deec",
+                    }}
+                  >
+                    What AWS jobs are you interested in?
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={5}
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    style={{
+                      ...inputStyle,
+                      resize: "vertical",
+                      minHeight: "120px",
+                    }}
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={status === "submitting"}
+                  style={{
+                    padding: "16px 24px",
+                    borderRadius: "12px",
+                    border: "none",
+                    backgroundColor: "#4f7cff",
+                    color: "white",
+                    fontWeight: 700,
+                    fontSize: "16px",
+                    cursor: "pointer",
+                    opacity: status === "submitting" ? 0.8 : 1,
+                  }}
+                >
+                  {status === "submitting" ? "Submitting..." : "Get Early Access"}
+                </button>
+
+                {status === "success" && (
+                  <p style={{ color: "#7ee787", fontWeight: 600, margin: 0 }}>
+                    Thanks — you're on the early access list. We'll reach out shortly.
+                  </p>
+                )}
+
+                {status === "error" && (
+                  <p style={{ color: "#ff8a8a", fontWeight: 600, margin: 0 }}>
+                    {errorMessage}
+                  </p>
+                )}
+              </div>
+            </form>
+          </div>
         </section>
       </div>
     </div>
-  )
+  );
 }
+
+const inputStyle = {
+  width: "100%",
+  padding: "14px 16px",
+  borderRadius: "12px",
+  border: "1px solid rgba(255,255,255,0.12)",
+  backgroundColor: "#121933",
+  color: "#f5f7fb",
+  fontSize: "16px",
+  outline: "none",
+  boxSizing: "border-box",
+};
