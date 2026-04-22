@@ -12,9 +12,21 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:4000",
+  "https://allira-landing.vercel.app",
+  "https://allure.io",
+  "https://www.allure.io",
+];
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_ORIGIN,
+    origin(origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      return callback(new Error(`CORS blocked for origin: ${origin}`));
+    },
   })
 );
 
