@@ -8,13 +8,14 @@ dotenv.config();
 const app = express();
 const { Pool } = pg;
 
+const useSsl = process.env.DB_SSL === "true";
+
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false,
+  ssl: useSsl ? { rejectUnauthorized: false } : false,
 });
 
 const allowedOrigins = [
-  "http://localhost:5173",
   "http://localhost:4000",
   "https://allira-landing.vercel.app",
 ];
