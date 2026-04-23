@@ -18,6 +18,9 @@ const pool = new Pool({
 const allowedOrigins = [
   "http://localhost:4000",
   "https://allira-landing.vercel.app",
+  "https://allira-landing-git-main-dflyman60-2565s-projects.vercel.app",
+  "https://allira-landing-k7p5p7p2m-dflyman60-2565s-projects.vercel.app",
+  "https://allira.io",
 ];
 
 app.use((req, _res, next) => {
@@ -36,7 +39,6 @@ app.use(
     allowedHeaders: ["Content-Type", "x-admin-key"],
   })
 );
-
 
 app.use(express.json());
 
