@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 
 const API_BASE =
-  import.meta.env.VITE_API_BASE_URL ||
-  "http://localhost:3001";
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
+
+const ADMIN_API_KEY = import.meta.env.VITE_ADMIN_API_KEY || "";
+const ADMIN_PAGE_PASSWORD = import.meta.env.VITE_ADMIN_PAGE_PASSWORD || "";
 
 const STATUS_OPTIONS = [
   "new",
@@ -13,11 +15,29 @@ const STATUS_OPTIONS = [
 ];
 
 export default function Admin() {
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [passwordInput, setPasswordInput] = useState("");
+  const [authError, setAuthError] = useState("");
+
   const [rows, setRows] = useState([]);
   const [filter, setFilter] = useState("all");
   const [loading, setLoading] = useState(true);
   const [savingId, setSavingId] = useState(null);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const unlocked = sessionStorage.getItem("allira_admin_unlocked");
+    if (unlocked === "true") {
+      setIsAuthorized(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isAuthorized) {
+      loadRows();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthorized]);
 
   async function loadRows(selectedStatus = filter) {
     setLoading(true);
@@ -29,7 +49,12 @@ export default function Admin() {
           ? `?status=${encodeURIComponent(selectedStatus)}`
           : "";
 
-      const response = await fetch(`${API_BASE}/api/early-access${query}`);
+      const response = await fetch(`${API_BASE}/api/early-access${query}`, {
+        headers: {
+          "x-admin-key": ADMIN_API_KEY,
+        },
+      });
+
       const data = await response.json();
 
       if (!response.ok) {
@@ -44,11 +69,6 @@ export default function Admin() {
     }
   }
 
-  useEffect(() => {
-    loadRows();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   async function updateRow(id, updates) {
     setSavingId(id);
     setError("");
@@ -58,6 +78,7 @@ export default function Admin() {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          "x-admin-key": ADMIN_API_KEY,
         },
         body: JSON.stringify(updates),
       });
@@ -76,6 +97,119 @@ export default function Admin() {
     } finally {
       setSavingId(null);
     }
+  }
+
+  function handleUnlock(e) {
+    e.preventDefault();
+
+    if (!ADMIN_PAGE_PASSWORD) {
+      setAuthError("Admin password is not configured.");
+      return;
+    }
+
+    if (passwordInput === ADMIN_PAGE_PASSWORD) {
+      setIsAuthorized(true);
+      setAuthError("");
+      sessionStorage.setItem("allira_admin_unlocked", "true");
+    } else {
+      setAuthError("Incorrect password.");
+    }
+  }
+
+  function handleLogout() {
+    sessionStorage.removeItem("allira_admin_unlocked");
+    setIsAuthorized(false);
+    setPasswordInput("");
+    setAuthError("");
+  }
+
+  if (!isAuthorized) {
+    return (
+      <div
+        style={{
+          fontFamily: "Arial, sans-serif",
+          backgroundColor: "#0b1020",
+          color: "#f5f7fb",
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "24px",
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            maxWidth: "420px",
+            background: "linear-gradient(180deg, #11182f 0%, #0d1428 100%)",
+            border: "1px solid rgba(255,255,255,0.08)",
+            borderRadius: "18px",
+            padding: "28px",
+            boxShadow: "0 20px 60px rgba(0,0,0,0.25)",
+          }}
+        >
+          <div
+            style={{
+              fontSize: "12px",
+              letterSpacing: "1px",
+              textTransform: "uppercase",
+              color: "#93a4c3",
+              marginBottom: "10px",
+            }}
+          >
+            Internal Access
+          </div>
+
+          <h1
+            style={{
+              fontSize: "28px",
+              fontWeight: 800,
+              margin: "0 0 12px 0",
+            }}
+          >
+            Allira Admin
+          </h1>
+
+          <p
+            style={{
+              color: "#aebbd5",
+              lineHeight: 1.6,
+              marginBottom: "20px",
+            }}
+          >
+            Enter the admin password to access the internal marketing console.
+          </p>
+
+          <form onSubmit={handleUnlock}>
+            <div style={{ display: "grid", gap: "14px" }}>
+              <input
+                type="password"
+                value={passwordInput}
+                onChange={(e) => setPasswordInput(e.target.value)}
+                placeholder="Enter admin password"
+                style={passwordInputStyle}
+              />
+
+              <button type="submit" style={buttonStyle}>
+                Unlock Admin
+              </button>
+
+              {authError && (
+                <div
+                  style={{
+                    color: "#ff8a8a",
+                    fontWeight: 600,
+                    fontSize: "14px",
+                  }}
+                >
+                  {authError}
+                </div>
+              )}
+            </div>
+          </form>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -128,7 +262,7 @@ export default function Admin() {
             </h1>
           </div>
 
-          <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+          <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
             <select
               value={filter}
               onChange={(e) => {
@@ -146,11 +280,18 @@ export default function Admin() {
               ))}
             </select>
 
-            <button
-              onClick={() => loadRows()}
-              style={buttonStyle}
-            >
+            <button onClick={() => loadRows()} style={buttonStyle}>
               Refresh
+            </button>
+
+            <button
+              onClick={handleLogout}
+              style={{
+                ...buttonStyle,
+                backgroundColor: "#1b2446",
+              }}
+            >
+              Lock
             </button>
           </div>
         </header>
@@ -319,6 +460,18 @@ const inputStyle = {
   backgroundColor: "#121933",
   color: "#f5f7fb",
   fontSize: "14px",
+  outline: "none",
+  boxSizing: "border-box",
+};
+
+const passwordInputStyle = {
+  width: "100%",
+  padding: "14px 16px",
+  borderRadius: "12px",
+  border: "1px solid rgba(255,255,255,0.12)",
+  backgroundColor: "#121933",
+  color: "#f5f7fb",
+  fontSize: "16px",
   outline: "none",
   boxSizing: "border-box",
 };
