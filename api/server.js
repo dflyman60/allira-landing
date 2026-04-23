@@ -20,6 +20,11 @@ const allowedOrigins = [
   "https://allira-landing.vercel.app",
 ];
 
+app.use((req, _res, next) => {
+  console.log("Method:", req.method, "Origin:", req.headers.origin);
+  next();
+});
+
 app.use(
   cors({
     origin(origin, callback) {
@@ -27,8 +32,13 @@ app.use(
       if (allowedOrigins.includes(origin)) return callback(null, true);
       return callback(new Error(`CORS blocked for origin: ${origin}`));
     },
+    methods: ["GET", "POST", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "x-admin-key"],
   })
 );
+
+app.options("*", cors());
+
 
 app.use(express.json());
 
