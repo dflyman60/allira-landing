@@ -10,11 +10,12 @@ const { Pool } = pg;
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
+  ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false,
 });
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://www.allira.io",
+  "http://localhost:4000",
   "https://allira-landing.vercel.app",
 ];
 
@@ -36,7 +37,11 @@ app.get("/api/health", async (_req, res) => {
     res.json({ ok: true, db: true, now: result.rows[0].now });
   } catch (error) {
     console.error("Health check failed:", error);
-    res.status(500).json({ ok: false, db: false, error: error.message });
+    res.status(500).json({
+      ok: false,
+      db: false,
+      error: error?.message || String(error),
+    });
   }
 });
 
@@ -88,29 +93,98 @@ app.post("/api/early-access", async (req, res) => {
     console.error("Early access submission failed:", error);
     return res.status(500).json({
       ok: false,
-      error: error.message,
+      error: error?.message || "Failed to save request.",
     });
   }
 });
 
-app.get("/api/early-access", async (_req, res) => {
+app.get("/api/early-access", async (req, res) => {
+  const status = req.query.status;
+
   try {
-    const result = await pool.query(`
-      select id, created_at, name, email, company, message, status
-      from early_access_request
-      order by created_at desc
-      limit 50
-    `);
+    let result;
+
+    if (status && status !== "all") {
+      result = await pool.query(
+        `
+        select id, created_at, name, email, company, message, status, notes
+        from early_access_request
+        where status = $1
+        order by created_at desc
+        limit 100
+        `,
+        [status]
+      );
+    } else {
+      result = await pool.query(`
+        select id, created_at, name, email, company, message, status, notes
+        from early_access_request
+        order by created_at desc
+        limit 100
+      `);
+    }
 
     res.json({ ok: true, data: result.rows });
   } catch (error) {
-    console.error("Fetch failed:", error);
-    res.status(500).json({ ok: false, error: error.message });
+    console.error("Fetch early access requests failed:", error);
+    res.status(500).json({
+      ok: false,
+      error: error?.message || "Failed to fetch requests.",
+    });
+  }
+});
+
+app.patch("/api/early-access/:id", async (req, res) => {
+  const { id } = req.params;
+  const { status, notes } = req.body;
+
+  const allowedStatuses = [
+    "new",
+    "reviewing",
+    "contacted",
+    "qualified",
+    "not_interested",
+  ];
+
+  if (status && !allowedStatuses.includes(status)) {
+    return res.status(400).json({
+      ok: false,
+      error: "Invalid status value.",
+    });
+  }
+
+  try {
+    const result = await pool.query(
+      `
+      update early_access_request
+      set
+        status = coalesce($1, status),
+        notes = coalesce($2, notes)
+      where id = $3
+      returning id, created_at, name, email, company, message, status, notes
+      `,
+      [status ?? null, notes ?? null, id]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({
+        ok: false,
+        error: "Record not found.",
+      });
+    }
+
+    res.json({ ok: true, data: result.rows[0] });
+  } catch (error) {
+    console.error("Update early access request failed:", error);
+    res.status(500).json({
+      ok: false,
+      error: error?.message || "Failed to update request.",
+    });
   }
 });
 
 const port = Number(process.env.PORT) || 3001;
 
-app.listen(port, () => {
+app.listen(port, "0.0.0.0", () => {
   console.log(`Allure intake API listening on port ${port}`);
 });
