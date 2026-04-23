@@ -21,6 +21,7 @@ const allowedOrigins = [
   "https://allira-landing-git-main-dflyman60-2565s-projects.vercel.app",
   "https://allira-landing-k7p5p7p2m-dflyman60-2565s-projects.vercel.app",
   "https://allira.io",
+  "https://www.allira.io",
 ];
 
 app.use((req, _res, next) => {
