@@ -414,6 +414,11 @@ export default function App() {
         message: "Thanks — your early access request has been received.",
       });
 
+      window.gtag?.("event", "early_access_submit", {
+        event_category: "conversion",
+        event_label: "early_access_form",
+      });
+
       setFormData({ name: "", email: "", company: "", message: "" });
     } catch (error) {
       setFormStatus({
@@ -507,9 +512,18 @@ export default function App() {
                 placeholder="AWS migration, cloud engineer, senior"
                 style={searchInputStyle}
               />
-              <button onClick={() => setShowResults(true)} style={primaryButtonStyle}>
-                Find Matches
-              </button>
+                <button
+                  onClick={() => {
+                    setShowResults(true);
+                    window.gtag?.("event", "find_matches_click", {
+                      event_category: "engagement",
+                      event_label: "hero_search",
+                    });
+                  }}
+                  style={primaryButtonStyle}
+                >
+                  Find Matches
+                </button>
             </div>
 
             <div style={helperTextStyle}>
