@@ -442,9 +442,28 @@ export default function App() {
 
       <div style={pageInnerStyle}>
         <header style={headerStyle}>
-          <div style={{ fontSize: "28px", fontWeight: 700, letterSpacing: "0.5px" }}>
-            Allira
-          </div>
+<div style={{ display: "flex", flexDirection: "column", lineHeight: 1.1 }}>
+  <img
+    src="/branding/logo-primary.png"
+    alt="Allira"
+    style={{
+      height: "30px",
+      width: "110px",
+      display: "block",
+    }}
+  />
+
+  <div
+    style={{
+      fontSize: "11px",
+      color: "#8ea0c2",
+      marginTop: "4px",
+      letterSpacing: "0.3px",
+    }}
+  >
+    Better job matching, built on signals
+  </div>
+</div>
 
           <button style={topButtonStyle}>Interactive Preview</button>
         </header>
