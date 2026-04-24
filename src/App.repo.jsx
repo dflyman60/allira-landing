@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
+const API_BASE =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
+
 const DEMO_QUERY_CHIPS = ["AWS migration", "engineer", "senior"];
 
 const DEMO_MATCHES = [
@@ -96,7 +98,7 @@ const DEMO_MATCHES = [
 ];
 
 function FitGauge({ value, size = 92, color = "#9cd7b1", label = "FIT" }) {
-  const clamped = Math.max(0, Math.min(100, value));
+  const clampedValue = Math.max(0, Math.min(100, value));
 
   return (
     <div
@@ -129,18 +131,12 @@ function FitGauge({ value, size = 92, color = "#9cd7b1", label = "FIT" }) {
           strokeWidth="9"
           strokeLinecap="round"
           pathLength="100"
-          strokeDasharray={`${clamped} 100`}
+          strokeDasharray={`${clampedValue} 100`}
         />
       </svg>
 
       <div style={{ textAlign: "center", marginTop: "-6px" }}>
-        <div
-          style={{
-            fontSize: "11px",
-            color: "#8ea0c2",
-            letterSpacing: "0.7px",
-          }}
-        >
+        <div style={{ fontSize: "11px", color: "#8ea0c2", letterSpacing: "0.7px" }}>
           {label}
         </div>
         <div style={{ fontSize: "32px", fontWeight: 800, lineHeight: 1 }}>
@@ -159,17 +155,7 @@ function BackMetric({ label, value }) {
   return (
     <div style={backMetricStyle}>
       <div style={metricLabelStyle}>{label}</div>
-      <div style={{ color: "#fff", fontSize: 16, fontWeight: 800 }}>
-        {value}
-      </div>
-    </div>
-  );
-}
-
-function FeatureIcon({ src }) {
-  return (
-    <div style={featureIconShellStyle}>
-      <img src={src} alt="" style={{ width: 36, height: 36 }} />
+      <div style={{ color: "#ffffff", fontSize: "16px", fontWeight: 800 }}>{value}</div>
     </div>
   );
 }
@@ -185,11 +171,10 @@ function DetailMiniPanel({ match, onClose }) {
       </div>
 
       <div style={backSectionLabelStyle}>Signals</div>
-
       <div style={signalWrapStyle}>
-        {match.signals.map((s) => (
-          <span key={s} style={signalChipStyle}>
-            {s}
+        {match.signals.map((signal) => (
+          <span key={signal} style={signalChipStyle}>
+            {signal}
           </span>
         ))}
       </div>
@@ -207,28 +192,28 @@ function MatchFlipCard({ match }) {
   const [flipped, setFlipped] = useState(false);
   const [showMore, setShowMore] = useState(false);
 
-  const tone =
+  const chipTone =
     match.label === "Strong Match"
-      ? { bg: "rgba(124,232,172,.14)", color: "#9fe0b5" }
+      ? { bg: "rgba(124, 232, 172, 0.14)", color: "#9fe0b5" }
       : match.label === "Adjacent"
-        ? { bg: "rgba(255,213,103,.14)", color: "#ffe092" }
-        : { bg: "rgba(159,176,207,.16)", color: "#c4d0e7" };
+      ? { bg: "rgba(255, 213, 103, 0.14)", color: "#ffe092" }
+      : { bg: "rgba(159, 176, 207, 0.16)", color: "#c4d0e7" };
 
-  function flip() {
+  function handleFlip() {
     setShowMore(false);
-    setFlipped((v) => !v);
+    setFlipped((prev) => !prev);
   }
 
   return (
-    <div style={{ perspective: 1200, minHeight: 510 }}>
+    <div style={{ perspective: "1200px", minHeight: "430px" }}>
       <div
-        onClick={flip}
+        onClick={handleFlip}
         style={{
           position: "relative",
           width: "100%",
-          minHeight: 510,
+          minHeight: "430px",
           transformStyle: "preserve-3d",
-          transition: "transform .58s cubic-bezier(.22,1,.36,1)",
+          transition: "transform 0.58s cubic-bezier(0.22, 1, 0.36, 1)",
           transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
           cursor: "pointer",
         }}
@@ -243,8 +228,8 @@ function MatchFlipCard({ match }) {
             <div
               style={{
                 ...labelPillStyle,
-                backgroundColor: tone.bg,
-                color: tone.color,
+                backgroundColor: chipTone.bg,
+                color: chipTone.color,
               }}
             >
               {match.label}
@@ -266,9 +251,9 @@ function MatchFlipCard({ match }) {
           <div style={whyShortStyle}>{match.whyShort}</div>
 
           <div style={tagWrapStyle}>
-            {match.previewTags.map((t) => (
-              <span key={t} style={tagChipStyle}>
-                {t}
+            {match.previewTags.map((tag) => (
+              <span key={tag} style={tagChipStyle}>
+                {tag}
               </span>
             ))}
           </div>
@@ -296,61 +281,54 @@ function MatchFlipCard({ match }) {
             overflow: "hidden",
           }}
         >
-          {showMore && (
-            <DetailMiniPanel match={match} onClose={() => setShowMore(false)} />
-          )}
+          {showMore && <DetailMiniPanel match={match} onClose={() => setShowMore(false)} />}
 
-          <div style={backContentStyle}>
-            <div style={backHeaderStyle}>
-              <div>
-                <div style={backEyebrowStyle}>Match Rationale</div>
-                <div style={backTitleStyle}>{match.title}</div>
-                <div style={cardCompanyStyle}>
-                  {match.company} · {match.location}
-                </div>
+          <div style={backHeaderStyle}>
+            <div>
+              <div style={backEyebrowStyle}>Match Rationale</div>
+              <div style={backTitleStyle}>{match.title}</div>
+              <div style={cardCompanyStyle}>
+                {match.company} · {match.location}
               </div>
-
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowMore(true);
-                }}
-                style={secondaryButtonStyle}
-              >
-                More
-              </button>
             </div>
 
-            <div
-              style={{
-                ...labelPillStyle,
-                display: "inline-block",
-                width: "fit-content",
-                backgroundColor: tone.bg,
-                color: tone.color,
-                marginBottom: 14,
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowMore(true);
               }}
+              style={secondaryButtonStyle}
             >
-              {match.label}
-            </div>
+              More
+            </button>
+          </div>
 
-            <div style={backSummaryStyle}>{match.backSummary}</div>
+          <div
+            style={{
+              ...labelPillStyle,
+              display: "inline-block",
+              backgroundColor: chipTone.bg,
+              color: chipTone.color,
+              marginBottom: "14px",
+            }}
+          >
+            {match.label}
+          </div>
 
-            <div style={backSectionLabelStyle}>Why this matched</div>
+          <div style={backSummaryStyle}>{match.backSummary}</div>
 
-            <div style={{ display: "grid", gap: 9, marginBottom: 14 }}>
-              {match.rationale.map((r) => (
-                <div key={r} style={rationaleLineStyle}>
-                  ✔ {r}
-                </div>
-              ))}
-            </div>
+          <div style={backSectionLabelStyle}>Why this matched</div>
+          <div style={{ display: "grid", gap: "9px", marginBottom: "14px" }}>
+            {match.rationale.map((item) => (
+              <div key={item} style={rationaleLineStyle}>
+                ✔ {item}
+              </div>
+            ))}
           </div>
 
           <div style={cardFooterStyle}>
             <div style={hintStyle}>Tap again to return</div>
-
             <button
               type="button"
               onClick={(e) => {
@@ -372,23 +350,36 @@ function MatchFlipCard({ match }) {
 export default function App() {
   const [queryValue, setQueryValue] = useState(DEMO_QUERY_CHIPS.join(", "));
   const [showResults, setShowResults] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     company: "",
     message: "",
   });
-  const [formStatus, setFormStatus] = useState({ type: "", message: "" });
+
+  const [formStatus, setFormStatus] = useState({
+    type: "",
+    message: "",
+  });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const displayResults = useMemo(
-    () => (showResults ? DEMO_MATCHES : []),
-    [showResults],
-  );
+  const displayResults = useMemo(() => {
+    if (!showResults) return [];
+    return DEMO_MATCHES;
+  }, [showResults]);
+
+  function handleFindMatches() {
+    setShowResults(true);
+  }
 
   function handleFormChange(e) {
     const { name, value } = e.target;
-    setFormData((p) => ({ ...p, [name]: value }));
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   }
 
   async function handleSubmit(e) {
@@ -399,7 +390,9 @@ export default function App() {
     try {
       const response = await fetch(`${API_BASE}/api/early-access`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(formData),
       });
 
@@ -414,7 +407,12 @@ export default function App() {
         message: "Thanks — your early access request has been received.",
       });
 
-      setFormData({ name: "", email: "", company: "", message: "" });
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        message: "",
+      });
     } catch (error) {
       setFormStatus({
         type: "error",
@@ -430,73 +428,62 @@ export default function App() {
       <style>
         {`
           @keyframes fadeSlideIn {
-            from { opacity: 0; transform: translateY(14px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-
-          @media(max-width:900px){
-            .allira-hero-grid,
-            .allira-results-grid,
-            .allira-pillars-grid,
-            .allira-how-grid,
-            .allira-faq-grid {
-              grid-template-columns:1fr!important;
+            from {
+              opacity: 0;
+              transform: translateY(14px);
             }
-
-            .allira-hero-title {
-              font-size:46px!important;
-            }
-
-            .allira-seo-intro {
-              grid-template-columns:1fr!important;
+            to {
+              opacity: 1;
+              transform: translateY(0);
             }
           }
         `}
       </style>
 
-      <div style={orbOneStyle} />
-      <div style={orbTwoStyle} />
-
       <div style={pageInnerStyle}>
         <header style={headerStyle}>
-          <div style={{ display: "flex", flexDirection: "column", lineHeight: 1.1 }}>
-            <img
-              src="/branding/logo-primary.png"
-              alt="Allira"
-              style={{
-                height: 30,
-                width: 110,
-                display: "block",
-                objectFit: "contain",
-              }}
-            />
-            <div style={logoTaglineStyle}>
-              Better job matching, built on signals
-            </div>
-          </div>
+<div style={{ display: "flex", flexDirection: "column", lineHeight: 1.1 }}>
+  <img
+    src="/branding/logo-primary.png"
+    alt="Allira"
+    style={{
+      height: "30px",
+      width: "110px",
+      display: "block",
+    }}
+  />
+
+  <div
+    style={{
+      fontSize: "11px",
+      color: "#8ea0c2",
+      marginTop: "4px",
+      letterSpacing: "0.3px",
+    }}
+  >
+    Better job matching, built on signals
+  </div>
+</div>
 
           <button style={topButtonStyle}>Interactive Preview</button>
         </header>
 
-        <section className="allira-hero-grid" style={heroSectionStyle}>
+        <section style={heroSectionStyle}>
           <div>
-            <div style={eyebrowStyle}>
-              Precision job matching for cloud engineers
-            </div>
+            <div style={eyebrowStyle}>Precision job matching for cloud engineers</div>
 
-            <h1 className="allira-hero-title" style={heroTitleStyle}>
-              Find cloud roles that actually fit your experience.
+            <h1 style={heroTitleStyle}>
+              Find cloud roles that actually fit your experience
             </h1>
 
             <p style={heroTextStyle}>
-              Allira uses signal-based job matching to help AWS and cloud
-              engineers find roles aligned to their real experience—not just
-              keywords.
+              Allira cuts through job noise using signal-based matching, so you see
+              roles that fit your background instead of generic keyword results.
             </p>
 
             <div style={chipRowStyle}>
-              {DEMO_QUERY_CHIPS.map((c) => (
-                <QueryChip key={c}>{c}</QueryChip>
+              {DEMO_QUERY_CHIPS.map((chip) => (
+                <QueryChip key={chip}>{chip}</QueryChip>
               ))}
             </div>
 
@@ -504,44 +491,45 @@ export default function App() {
               <input
                 value={queryValue}
                 onChange={(e) => setQueryValue(e.target.value)}
-                placeholder="AWS migration, cloud engineer, senior"
+                placeholder="AWS migration, engineer, senior"
                 style={searchInputStyle}
               />
-              <button onClick={() => setShowResults(true)} style={primaryButtonStyle}>
+              <button onClick={handleFindMatches} style={primaryButtonStyle}>
                 Find Matches
               </button>
             </div>
 
+            <div style={helperTextStyle}>Preview intent: AWS migration, engineer, senior</div>
             <div style={helperTextStyle}>
-              Example search: AWS migration engineer, cloud platform, senior roles
-            </div>
-            <div style={helperTextStyle}>
-              Curated product preview showing how Allira interprets intent.
+              Curated product preview showing how Allira interprets intent
             </div>
             <div style={smallHelperTextStyle}>
-              Live product experience and deeper matching logic coming next.
+              Live product experience and deeper matching logic coming next
             </div>
           </div>
 
           <div style={exampleCardOuterStyle}>
             <div style={exampleLabelStyle}>Example match</div>
+
             <div style={exampleCardInnerStyle}>
               <div style={exampleTitleStyle}>Senior AWS Migration Engineer</div>
+
               <div style={examplePillStyle}>Strong Match</div>
+
               <div style={exampleTextStyle}>
                 Why this matches: Strong alignment with AWS migration and
-                infrastructure modernization.
+                infrastructure modernization
               </div>
-              <div style={exampleTextStyle}>
-                Matches: AWS, Cloud Migration, Terraform
-              </div>
+
+              <div style={exampleTextStyle}>Matches: AWS, Cloud Migration, Terraform</div>
               <div style={exampleMutedTextStyle}>
                 Lower friction, direct role/title alignment
               </div>
+
               <div style={tagWrapStyle}>
-                {["AWS", "Migration", "Terraform", "Cloud"].map((t) => (
-                  <span key={t} style={tagChipStyle}>
-                    {t}
+                {["AWS", "Migration", "Terraform", "Cloud"].map((tag) => (
+                  <span key={tag} style={tagChipStyle}>
+                    {tag}
                   </span>
                 ))}
               </div>
@@ -549,71 +537,45 @@ export default function App() {
           </div>
         </section>
 
-        <section className="allira-seo-intro" style={seoIntroStyle}>
-          <div style={seoIconStyle}>
-            <img
-              src="/branding/cloud-signal.svg"
-              alt=""
-              style={{ width: 42, height: 42 }}
-            />
-          </div>
-          <div>
-            <p style={seoLeadStyle}>
-              Allira is built for AWS cloud engineers, platform engineers, and
-              DevOps professionals looking for roles in cloud infrastructure,
-              migration, and platform engineering.
-            </p>
-            <p style={seoBodyStyle}>
-              Instead of relying on keyword searches, Allira evaluates real job
-              signals to match you with cloud roles that align with your
-              experience across AWS services, infrastructure tooling, and
-              engineering responsibilities.
-            </p>
-          </div>
-        </section>
-
-        <section className="allira-pillars-grid" style={pillarsGridStyle}>
+        <section style={pillarsGridStyle}>
           {[
             {
               title: "Real Matching",
               text: "Allira looks beyond job titles and keyword stuffing to surface roles that actually align with your experience.",
-              icon: "/branding/target-signal.svg",
             },
             {
               title: "Explainable Results",
               text: "See why a role matched, which signals were found, and what makes it worth your time.",
-              icon: "/branding/explain-signal.svg",
             },
             {
               title: "Built for Cloud",
-              text: "Purpose-built for AWS and cloud professionals—not generic job boards.",
-              icon: "/branding/cloud-signal.svg",
+              text: "Focused on AWS, cloud operations, DevOps, platform, and adjacent engineering roles from day one.",
             },
-          ].map((i) => (
-            <div key={i.title} style={pillarCardStyle}>
-              <FeatureIcon src={i.icon} />
-              <div style={pillarTitleStyle}>{i.title}</div>
-              <div style={pillarTextStyle}>{i.text}</div>
+          ].map((item) => (
+            <div key={item.title} style={pillarCardStyle}>
+              <div style={pillarTitleStyle}>{item.title}</div>
+              <div style={pillarTextStyle}>{item.text}</div>
             </div>
           ))}
         </section>
 
         {showResults && (
-          <section style={{ marginBottom: 64 }}>
+          <section style={{ marginBottom: "64px" }}>
             <div style={resultsHeaderStyle}>
               <div>
                 <div style={eyebrowStyle}>Interactive Preview</div>
                 <h2 style={resultsTitleStyle}>Matches for “{queryValue}”</h2>
               </div>
+
               <div style={resultsSubTextStyle}>
-                Curated results showing how Allira can distinguish direct,
-                adjacent, and partial role alignment.
+                Curated results showing how Allira can distinguish direct, adjacent, and
+                partial role alignment.
               </div>
             </div>
 
-            <div className="allira-results-grid" style={resultsGridStyle}>
-              {displayResults.map((m) => (
-                <MatchFlipCard key={m.id} match={m} />
+            <div style={resultsGridStyle}>
+              {displayResults.map((match) => (
+                <MatchFlipCard key={match.id} match={match} />
               ))}
             </div>
           </section>
@@ -621,14 +583,13 @@ export default function App() {
 
         <section style={formSectionStyle}>
           <div style={eyebrowStyle}>Early Access</div>
-          <h2 style={formTitleStyle}>Start with better signal</h2>
-          <p style={formTextStyle}>
-            Join the early access list and be among the first to experience signal-based matching for cloud and platform roles.
-          </p>
 
-          <div style={earlyAccessNoteStyle}>
-            Early access is focused on AWS, cloud migration, platform engineering, and DevOps roles.
-          </div>
+          <h2 style={formTitleStyle}>Start with better signal</h2>
+
+          <p style={formTextStyle}>
+            Join the early access list and be among the first to experience signal-based
+            matching for cloud and platform roles.
+          </p>
 
           <form onSubmit={handleSubmit} style={formGridStyle}>
             <input
@@ -639,6 +600,7 @@ export default function App() {
               required
               style={formInputStyle}
             />
+
             <input
               name="email"
               type="email"
@@ -648,6 +610,7 @@ export default function App() {
               required
               style={formInputStyle}
             />
+
             <input
               name="company"
               placeholder="Company"
@@ -655,6 +618,7 @@ export default function App() {
               onChange={handleFormChange}
               style={formInputStyle}
             />
+
             <textarea
               name="message"
               placeholder="What roles are you interested in?"
@@ -665,16 +629,20 @@ export default function App() {
               style={{
                 ...formInputStyle,
                 resize: "vertical",
-                minHeight: 110,
+                minHeight: "110px",
                 fontFamily: "inherit",
-                lineHeight: 1.5,
-                paddingTop: 16,
+                lineHeight: "1.5",
+                paddingTop: "16px",
               }}
             />
+
             <button
               type="submit"
               disabled={isSubmitting}
-              style={{ ...primaryButtonStyle, opacity: isSubmitting ? 0.8 : 1 }}
+              style={{
+                ...primaryButtonStyle,
+                opacity: isSubmitting ? 0.8 : 1,
+              }}
             >
               {isSubmitting ? "Submitting..." : "Get Early Access"}
             </button>
@@ -683,7 +651,7 @@ export default function App() {
           {formStatus.message && (
             <div
               style={{
-                marginTop: 14,
+                marginTop: "14px",
                 color: formStatus.type === "success" ? "#9fe0b5" : "#ff9f9f",
                 fontWeight: 600,
                 lineHeight: 1.5,
@@ -694,55 +662,20 @@ export default function App() {
           )}
         </section>
 
-        <section style={faqSectionStyle}>
-          <div style={eyebrowStyle}>FAQ</div>
-        
-          <h2 style={faqTitleStyle}>
-            Common questions about Allira
-          </h2>
-        
-          <div className="allira-faq-grid" style={faqGridStyle}>
-            {[
-              {
-                q: "What is signal-based job matching?",
-                a: "Instead of relying on keyword searches, Allira evaluates real job signals like technologies, responsibilities, and patterns to match you with roles that actually fit your experience."
-              },
-              {
-                q: "Is Allira built for AWS engineers?",
-                a: "Yes. Early access is focused on AWS cloud engineers, platform engineers, and DevOps professionals working across cloud infrastructure and migration."
-              },
-              {
-                q: "How is this different from job boards like LinkedIn?",
-                a: "Traditional job boards rely heavily on keyword matching. Allira analyzes deeper signals to surface roles that align more closely with your actual experience and intent."
-              },
-              {
-                q: "What types of roles will I find?",
-                a: "You’ll see roles across AWS, cloud infrastructure, platform engineering, DevOps, and migration-focused engineering positions."
-              }
-            ].map((item) => (
-              <div key={item.q} style={faqCardStyle}>
-                <div style={faqQuestionStyle}>{item.q}</div>
-                <div style={faqAnswerStyle}>{item.a}</div>
-              </div>
-            ))}
-          </div>
-        </section>
-
         <section style={howItWorksStyle}>
           <div style={eyebrowStyle}>How it works</div>
-          <div style={howTitleStyle}>
-            A cleaner path from intent to relevant jobs
-          </div>
 
-          <div className="allira-how-grid" style={howGridStyle}>
+          <div style={howTitleStyle}>A cleaner path from intent to relevant jobs</div>
+
+          <div style={howGridStyle}>
             {[
               "Describe the role you want in plain English or with targeted signals.",
               "Allira maps that intent to meaningful job signals and related roles.",
               "You get ranked cloud roles with clear reasons why they match.",
-            ].map((t, idx) => (
-              <div key={t} style={howCardStyle}>
-                <div style={stepBubbleStyle}>{idx + 1}</div>
-                <div style={{ color: "#d7deec", lineHeight: 1.6 }}>{t}</div>
+            ].map((text, index) => (
+              <div key={index} style={howCardStyle}>
+                <div style={stepBubbleStyle}>{index + 1}</div>
+                <div style={{ color: "#d7deec", lineHeight: 1.6 }}>{text}</div>
               </div>
             ))}
           </div>
@@ -752,137 +685,55 @@ export default function App() {
   );
 }
 
-
-const faqSectionStyle = {
-  marginBottom: "56px",
-};
-
-const faqTitleStyle = {
-  fontSize: "34px",
-  fontWeight: 800,
-  marginBottom: "18px",
-};
-
-const faqGridStyle = {
-  display: "grid",
-  gridTemplateColumns: "repeat(2, 1fr)",
-  gap: "18px",
-};
-
-const faqCardStyle = {
-  backgroundColor: "rgba(17,24,47,.82)",
-  border: "1px solid rgba(255,255,255,.08)",
-  borderRadius: "18px",
-  padding: "22px",
-};
-
-const faqQuestionStyle = {
-  fontSize: "17px",
-  fontWeight: 700,
-  marginBottom: "10px",
-  color: "#ffffff",
-};
-
-const faqAnswerStyle = {
-  color: "#c3cee3",
-  lineHeight: 1.6,
-  fontSize: "15px",
-};
-
 const pageStyle = {
-  fontFamily: "Arial,sans-serif",
+  fontFamily: "Arial, sans-serif",
   backgroundColor: "#0b1020",
-  backgroundImage:
-    "radial-gradient(circle at 80% 18%, rgba(79,124,255,.24), transparent 34%), radial-gradient(circle at 18% 4%, rgba(96,165,250,.12), transparent 30%), linear-gradient(180deg,#070b16 0%,#0b1020 55%,#08101f 100%)",
   color: "#f5f7fb",
   minHeight: "100vh",
   margin: 0,
-  position: "relative",
-  overflow: "hidden",
-};
-
-const earlyAccessNoteStyle = {
-  marginTop: "6px",
-  marginBottom: "18px",
-  color: "#9fb0cf",
-  fontSize: "14px",
-  lineHeight: 1.5,
-};
-
-const orbOneStyle = {
-  position: "absolute",
-  width: 520,
-  height: 520,
-  right: -220,
-  top: 180,
-  background: "radial-gradient(circle,rgba(79,124,255,.18),transparent 62%)",
-  filter: "blur(4px)",
-  pointerEvents: "none",
-};
-
-const orbTwoStyle = {
-  position: "absolute",
-  width: 440,
-  height: 440,
-  left: -180,
-  top: 680,
-  background: "radial-gradient(circle,rgba(156,215,177,.10),transparent 62%)",
-  filter: "blur(8px)",
-  pointerEvents: "none",
 };
 
 const pageInnerStyle = {
-  maxWidth: 1180,
+  maxWidth: "1180px",
   margin: "0 auto",
   padding: "32px 24px 80px",
-  position: "relative",
-  zIndex: 1,
 };
 
 const headerStyle = {
-  marginTop: "12px",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  marginBottom: 56,
-  gap: 16,
+  marginBottom: "56px",
+  gap: "16px",
   flexWrap: "wrap",
-};
-
-const logoTaglineStyle = {
-  fontSize: 11,
-  color: "#8ea0c2",
-  marginTop: 4,
-  letterSpacing: 0.3,
 };
 
 const topButtonStyle = {
   backgroundColor: "transparent",
   color: "#f5f7fb",
-  border: "1px solid rgba(255,255,255,.18)",
-  borderRadius: 10,
+  border: "1px solid rgba(255,255,255,0.18)",
+  borderRadius: "10px",
   padding: "10px 16px",
   cursor: "pointer",
-  fontSize: 14,
+  fontSize: "14px",
 };
 
 const heroSectionStyle = {
   display: "grid",
-  gridTemplateColumns: "1.05fr .95fr",
-  gap: 34,
-  alignItems: "start",
-  marginBottom: 44,
-  marginTop: 16,
+  gridTemplateColumns: "1.1fr 0.9fr",
+  gap: "32px",
+  alignItems: "center",
+  marginBottom: "64px",
+  marginTop: "16px",
 };
 
 const eyebrowStyle = {
   display: "inline-block",
-  fontSize: 12,
-  letterSpacing: 1.3,
+  fontSize: "12px",
+  letterSpacing: "1px",
   textTransform: "uppercase",
   color: "#93a4c3",
-  marginBottom: 12,
-  fontWeight: 700,
+  marginBottom: "12px",
 };
 
 const heroTitleStyle = {
@@ -895,102 +746,61 @@ const heroTitleStyle = {
 };
 
 const heroTextStyle = {
-  fontSize: 21,
-  lineHeight: 1.55,
-  color: "#c6d2e8",
-  maxWidth: 690,
-  marginBottom: 24,
+  fontSize: "18px",
+  lineHeight: 1.6,
+  color: "#b8c3d9",
+  maxWidth: "620px",
+  marginBottom: "20px",
 };
 
 const chipRowStyle = {
   display: "flex",
-  gap: 12,
+  gap: "10px",
   flexWrap: "wrap",
-  marginBottom: 18,
+  marginBottom: "16px",
 };
 
 const queryChipStyle = {
-  padding: "11px 16px",
-  borderRadius: 999,
-  backgroundColor: "rgba(79,124,255,.14)",
-  color: "#d3ddff",
-  border: "1px solid rgba(79,124,255,.34)",
-  fontSize: 15,
-  fontWeight: 700,
+  padding: "10px 14px",
+  borderRadius: "999px",
+  backgroundColor: "rgba(79,124,255,0.14)",
+  color: "#bdd0ff",
+  border: "1px solid rgba(79,124,255,0.22)",
+  fontSize: "14px",
+  fontWeight: 600,
 };
 
 const searchRowStyle = {
   display: "flex",
-  gap: 12,
+  gap: "12px",
   flexWrap: "wrap",
-  marginBottom: 14,
+  marginBottom: "10px",
 };
 
 const searchInputStyle = {
-  flex: "1 1 380px",
-  minWidth: 280,
-  padding: "18px 20px",
-  borderRadius: 14,
-  border: "1px solid rgba(255,255,255,.15)",
-  backgroundColor: "rgba(18,25,51,.74)",
+  flex: "1 1 320px",
+  minWidth: "280px",
+  padding: "16px 18px",
+  borderRadius: "12px",
+  border: "1px solid rgba(255,255,255,0.12)",
+  backgroundColor: "#121933",
   color: "#f5f7fb",
-  fontSize: 18,
+  fontSize: "16px",
   outline: "none",
 };
 
 const helperTextStyle = {
-  color: "#b7c5e0",
-  fontSize: 15,
-  marginBottom: 7,
+  color: "#9fb0cf",
+  fontSize: "14px",
+  marginBottom: "6px",
 };
 
 const smallHelperTextStyle = {
-  color: "#8ea0c2",
-  fontSize: 14,
-};
-
-const seoIntroStyle = {
-  display: "grid",
-  gridTemplateColumns: "88px 1fr",
-  gap: 26,
-  alignItems: "start",
-  borderTop: "1px solid rgba(255,255,255,.10)",
-  paddingTop: 30,
-  marginBottom: 38,
-  maxWidth: 980,
-};
-
-const seoIconStyle = {
-  width: 74,
-  height: 74,
-  borderRadius: 999,
-  background:
-    "linear-gradient(180deg,rgba(79,124,255,.22),rgba(79,124,255,.08))",
-  border: "1px solid rgba(255,255,255,.10)",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  boxShadow: "0 20px 50px rgba(0,0,0,.24)",
-};
-
-const seoLeadStyle = {
-  color: "#f5f7fb",
-  fontSize: 22,
-  lineHeight: 1.45,
-  margin: "0 0 14px 0",
-  maxWidth: 860,
-};
-
-const seoBodyStyle = {
-  color: "#c2cce0",
-  fontSize: 19,
-  lineHeight: 1.62,
-  margin: 0,
-  maxWidth: 900,
+  color: "#7f91b3",
+  fontSize: "13px",
 };
 
 const exampleCardOuterStyle = {
-  marginTop: "50px",
   background: "linear-gradient(180deg, #151d3b 0%, #0f1630 100%)",
   border: "1px solid rgba(255,255,255,0.10)",
   borderRadius: "20px",
@@ -999,127 +809,112 @@ const exampleCardOuterStyle = {
 };
 
 const exampleLabelStyle = {
-  fontSize: 13,
+  fontSize: "13px",
   color: "#8ea0c2",
-  marginBottom: 14,
+  marginBottom: "14px",
   textTransform: "uppercase",
-  letterSpacing: 1,
+  letterSpacing: "1px",
 };
 
 const exampleCardInnerStyle = {
-  backgroundColor: "rgba(11,16,32,.82)",
-  borderRadius: 16,
-  padding: 20,
-  border: "1px solid rgba(255,255,255,.08)",
+  backgroundColor: "#0b1020",
+  borderRadius: "16px",
+  padding: "20px",
+  border: "1px solid rgba(255,255,255,0.08)",
 };
 
 const exampleTitleStyle = {
-  fontSize: 22,
+  fontSize: "22px",
   fontWeight: 700,
-  marginBottom: 8,
+  marginBottom: "8px",
 };
 
 const examplePillStyle = {
   display: "inline-block",
-  backgroundColor: "rgba(79,124,255,.16)",
+  backgroundColor: "rgba(79,124,255,0.16)",
   color: "#9cb8ff",
-  borderRadius: 999,
+  borderRadius: "999px",
   padding: "8px 12px",
-  fontSize: 13,
+  fontSize: "13px",
   fontWeight: 600,
-  marginBottom: 18,
+  marginBottom: "18px",
 };
 
 const exampleTextStyle = {
   color: "#d7deec",
-  marginBottom: 10,
-  fontSize: 15,
+  marginBottom: "10px",
+  fontSize: "15px",
   lineHeight: 1.5,
 };
 
 const exampleMutedTextStyle = {
   color: "#9eb0d0",
-  marginBottom: 18,
-  fontSize: 15,
+  marginBottom: "18px",
+  fontSize: "15px",
 };
 
 const pillarsGridStyle = {
   display: "grid",
-  gridTemplateColumns: "repeat(3,1fr)",
-  gap: 22,
-  marginBottom: 64,
+  gridTemplateColumns: "repeat(3, 1fr)",
+  gap: "18px",
+  marginBottom: "64px",
 };
 
 const pillarCardStyle = {
-  backgroundColor: "rgba(17,24,47,.82)",
-  border: "1px solid rgba(255,255,255,.08)",
-  borderRadius: 20,
-  padding: 28,
-  minHeight: 250,
-  backdropFilter: "blur(8px)",
-};
-
-const featureIconShellStyle = {
-  width: 76,
-  height: 76,
-  borderRadius: 999,
-  background:
-    "linear-gradient(180deg,rgba(79,124,255,.22),rgba(79,124,255,.08))",
-  border: "1px solid rgba(255,255,255,.10)",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  marginBottom: 22,
+  backgroundColor: "#11182f",
+  border: "1px solid rgba(255,255,255,0.08)",
+  borderRadius: "18px",
+  padding: "24px",
 };
 
 const pillarTitleStyle = {
-  fontSize: 25,
-  fontWeight: 800,
-  marginBottom: 12,
+  fontSize: "20px",
+  fontWeight: 700,
+  marginBottom: "10px",
 };
 
 const pillarTextStyle = {
-  color: "#c3cee3",
-  lineHeight: 1.62,
-  fontSize: 17,
+  color: "#aebbd5",
+  lineHeight: 1.6,
+  fontSize: "15px",
 };
 
 const resultsHeaderStyle = {
   display: "flex",
   justifyContent: "space-between",
-  gap: 20,
+  gap: "20px",
   alignItems: "center",
-  marginBottom: 16,
+  marginBottom: "16px",
   flexWrap: "wrap",
 };
 
 const resultsTitleStyle = {
-  fontSize: 36,
+  fontSize: "36px",
   margin: 0,
   fontWeight: 800,
 };
 
 const resultsSubTextStyle = {
   color: "#9fb0cf",
-  fontSize: 15,
-  maxWidth: 420,
+  fontSize: "15px",
+  maxWidth: "420px",
 };
 
 const resultsGridStyle = {
   display: "grid",
-  gridTemplateColumns: "repeat(3,minmax(0,1fr))",
-  gap: 20,
+  gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+  gap: "20px",
   animation: "fadeSlideIn 520ms ease-out both",
 };
 
 const cardSideStyle = {
   position: "absolute",
   inset: 0,
-  background: "linear-gradient(180deg,#151d3b 0%,#0f1630 100%)",
-  border: "1px solid rgba(255,255,255,.10)",
-  borderRadius: 22,
-  padding: 20,
-  boxShadow: "0 20px 60px rgba(0,0,0,.22)",
+  background: "linear-gradient(180deg, #151d3b 0%, #0f1630 100%)",
+  border: "1px solid rgba(255,255,255,0.10)",
+  borderRadius: "22px",
+  padding: "20px",
+  boxShadow: "0 20px 60px rgba(0,0,0,0.22)",
   display: "flex",
   flexDirection: "column",
 };
@@ -1127,161 +922,155 @@ const cardSideStyle = {
 const cardHeaderStyle = {
   display: "flex",
   justifyContent: "space-between",
-  gap: 12,
+  gap: "12px",
   alignItems: "flex-start",
-  marginBottom: 14,
+  marginBottom: "14px",
 };
 
 const cardTitleStyle = {
-  fontSize: 28,
+  fontSize: "28px",
   fontWeight: 800,
-  color: "#fff",
+  color: "#ffffff",
   lineHeight: 1.12,
-  marginBottom: 6,
+  marginBottom: "6px",
 };
 
 const cardCompanyStyle = {
   color: "#9fb0cf",
-  fontSize: 15,
+  fontSize: "15px",
 };
 
 const labelPillStyle = {
   whiteSpace: "nowrap",
   padding: "8px 12px",
-  borderRadius: 999,
-  fontSize: 12,
+  borderRadius: "999px",
+  fontSize: "12px",
   fontWeight: 700,
-  letterSpacing: 0.6,
+  letterSpacing: "0.6px",
   textTransform: "uppercase",
 };
 
 const dividerStyle = {
-  height: 1,
-  backgroundColor: "rgba(255,255,255,.16)",
-  marginBottom: 14,
+  height: "1px",
+  backgroundColor: "rgba(255,255,255,0.16)",
+  marginBottom: "14px",
 };
 
 const summaryGridStyle = {
   display: "grid",
   gridTemplateColumns: "1fr auto",
-  gap: 16,
+  gap: "16px",
   alignItems: "center",
-  marginBottom: 14,
+  marginBottom: "14px",
 };
 
 const locationStyle = {
   color: "#cdd7ea",
-  fontSize: 15,
-  marginBottom: 7,
+  fontSize: "15px",
+  marginBottom: "7px",
 };
 
 const metaStyle = {
   color: "#9fb0cf",
-  fontSize: 14,
-  marginBottom: 3,
+  fontSize: "14px",
+  marginBottom: "3px",
 };
 
 const whyShortStyle = {
   color: "#d7deec",
-  marginBottom: 14,
-  fontSize: 15,
+  marginBottom: "14px",
+  fontSize: "15px",
   lineHeight: 1.5,
 };
 
 const tagWrapStyle = {
   display: "flex",
   flexWrap: "wrap",
-  gap: 10,
+  gap: "10px",
 };
 
 const tagChipStyle = {
   padding: "8px 10px",
-  borderRadius: 999,
+  borderRadius: "999px",
   backgroundColor: "#141c38",
-  border: "1px solid rgba(255,255,255,.08)",
-  fontSize: 13,
+  border: "1px solid rgba(255,255,255,0.08)",
+  fontSize: "13px",
   color: "#c7d3eb",
 };
 
 const cardFooterStyle = {
-  marginTop: "auto",
-  paddingTop: 14,
+  marginTop: "10px",
+  paddingTop: "6px",
   display: "flex",
   justifyContent: "space-between",
-  gap: 12,
+  gap: "12px",
   alignItems: "center",
 };
 
 const hintStyle = {
   color: "#8ea0c2",
-  fontSize: 13,
-};
-
-const backContentStyle = {
-  flex: 1,
-  display: "flex",
-  flexDirection: "column",
+  fontSize: "13px",
 };
 
 const backHeaderStyle = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "flex-start",
-  gap: 12,
-  marginBottom: 12,
+  gap: "12px",
+  marginBottom: "12px",
 };
 
 const backEyebrowStyle = {
-  fontSize: 12,
-  letterSpacing: 1,
+  fontSize: "12px",
+  letterSpacing: "1px",
   textTransform: "uppercase",
   color: "#93a4c3",
-  marginBottom: 8,
+  marginBottom: "8px",
   fontWeight: 700,
 };
 
 const backTitleStyle = {
-  fontSize: 25,
+  fontSize: "25px",
   fontWeight: 800,
-  color: "#fff",
+  color: "#ffffff",
   lineHeight: 1.14,
-  marginBottom: 7,
+  marginBottom: "7px",
 };
 
 const backSummaryStyle = {
   color: "#d7deec",
-  fontSize: 15,
+  fontSize: "15px",
   lineHeight: 1.5,
-  marginBottom: 16,
-  paddingRight: 8,
+  marginBottom: "16px",
+  paddingRight: "8px",
 };
 
 const backSectionLabelStyle = {
-  fontSize: 12,
+  fontSize: "12px",
   color: "#8ea0c2",
   textTransform: "uppercase",
-  letterSpacing: 0.8,
-  marginBottom: 8,
+  letterSpacing: "0.8px",
+  marginBottom: "8px",
   fontWeight: 700,
 };
 
 const rationaleLineStyle = {
   color: "#d7deec",
-  fontSize: 14,
+  fontSize: "14px",
   lineHeight: 1.45,
 };
 
 const miniPanelStyle = {
   position: "absolute",
-  top: 16,
-  right: 16,
-  width: 320,
+  top: "16px",
+  right: "16px",
+  width: "320px",
   maxWidth: "calc(100% - 32px)",
-  background: "linear-gradient(180deg,#101833 0%,#0b1228 100%)",
-  border: "1px solid rgba(255,255,255,.10)",
-  borderRadius: 18,
-  padding: 18,
-  boxShadow: "0 22px 50px rgba(0,0,0,.35)",
+  background: "linear-gradient(180deg, #101833 0%, #0b1228 100%)",
+  border: "1px solid rgba(255,255,255,0.10)",
+  borderRadius: "18px",
+  padding: "18px",
+  boxShadow: "0 22px 50px rgba(0,0,0,0.35)",
   zIndex: 3,
 };
 
@@ -1289,170 +1078,167 @@ const miniPanelHeaderStyle = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  marginBottom: 14,
-  gap: 12,
+  marginBottom: "14px",
+  gap: "12px",
 };
 
 const miniPanelTitleStyle = {
-  fontSize: 12,
+  fontSize: "12px",
   color: "#93a4c3",
   textTransform: "uppercase",
-  letterSpacing: 0.8,
+  letterSpacing: "0.8px",
   fontWeight: 700,
 };
 
 const signalWrapStyle = {
   display: "flex",
   flexWrap: "wrap",
-  gap: 8,
-  marginBottom: 16,
+  gap: "8px",
+  marginBottom: "16px",
 };
 
 const signalChipStyle = {
   padding: "7px 10px",
-  borderRadius: 999,
-  backgroundColor: "rgba(79,124,255,.10)",
-  border: "1px solid rgba(79,124,255,.18)",
+  borderRadius: "999px",
+  backgroundColor: "rgba(79,124,255,0.10)",
+  border: "1px solid rgba(79,124,255,0.18)",
   color: "#c8d7ff",
-  fontSize: 12,
+  fontSize: "12px",
   fontWeight: 600,
 };
 
 const metricGridStyle = {
   display: "grid",
-  gridTemplateColumns: "repeat(3,1fr)",
-  gap: 10,
+  gridTemplateColumns: "repeat(3, 1fr)",
+  gap: "10px",
 };
 
 const backMetricStyle = {
   backgroundColor: "#0f1730",
-  border: "1px solid rgba(255,255,255,.08)",
-  borderRadius: 14,
+  border: "1px solid rgba(255,255,255,0.08)",
+  borderRadius: "14px",
   padding: "12px 12px",
 };
 
 const metricLabelStyle = {
   color: "#8ea0c2",
-  fontSize: 11,
+  fontSize: "11px",
   textTransform: "uppercase",
-  letterSpacing: 0.7,
-  marginBottom: 4,
+  letterSpacing: "0.7px",
+  marginBottom: "4px",
   fontWeight: 700,
 };
 
 const formSectionStyle = {
-  background:
-    "linear-gradient(180deg,rgba(17,24,47,.88) 0%,rgba(13,20,40,.88) 100%)",
-  border: "1px solid rgba(255,255,255,.08)",
-  borderRadius: 22,
-  padding: 32,
-  marginBottom: 56,
-  maxWidth: 780,
+  background: "linear-gradient(180deg, #11182f 0%, #0d1428 100%)",
+  border: "1px solid rgba(255,255,255,0.08)",
+  borderRadius: "22px",
+  padding: "32px",
+  marginBottom: "56px",
+  maxWidth: "780px",
   marginLeft: "auto",
   marginRight: "auto",
-  backdropFilter: "blur(8px)",
 };
 
 const formTitleStyle = {
-  fontSize: 34,
+  fontSize: "34px",
   fontWeight: 800,
   margin: "0 0 12px 0",
 };
 
 const formTextStyle = {
   color: "#aebbd5",
-  fontSize: 17,
+  fontSize: "17px",
   lineHeight: 1.6,
-  marginBottom: 22,
+  marginBottom: "22px",
 };
 
 const formGridStyle = {
   display: "grid",
-  gap: 14,
+  gap: "14px",
 };
 
 const formInputStyle = {
   width: "100%",
   padding: "14px 16px",
-  borderRadius: 12,
-  border: "1px solid rgba(255,255,255,.12)",
+  borderRadius: "12px",
+  border: "1px solid rgba(255,255,255,0.12)",
   backgroundColor: "#121933",
   color: "#f5f7fb",
-  fontSize: 16,
+  fontSize: "16px",
   outline: "none",
   boxSizing: "border-box",
 };
 
 const howItWorksStyle = {
-  background:
-    "linear-gradient(180deg,rgba(17,24,47,.86) 0%,rgba(13,20,40,.86) 100%)",
-  border: "1px solid rgba(255,255,255,.08)",
-  borderRadius: 22,
-  padding: 32,
-  marginBottom: 56,
+  background: "linear-gradient(180deg, #11182f 0%, #0d1428 100%)",
+  border: "1px solid rgba(255,255,255,0.08)",
+  borderRadius: "22px",
+  padding: "32px",
+  marginBottom: "56px",
 };
 
 const howTitleStyle = {
-  fontSize: 34,
+  fontSize: "34px",
   fontWeight: 700,
-  marginBottom: 18,
+  marginBottom: "18px",
 };
 
 const howGridStyle = {
   display: "grid",
-  gridTemplateColumns: "repeat(3,1fr)",
-  gap: 18,
+  gridTemplateColumns: "repeat(3, 1fr)",
+  gap: "18px",
 };
 
 const howCardStyle = {
   backgroundColor: "#0b1020",
-  borderRadius: 16,
-  padding: 20,
-  border: "1px solid rgba(255,255,255,.06)",
+  borderRadius: "16px",
+  padding: "20px",
+  border: "1px solid rgba(255,255,255,0.06)",
 };
 
 const stepBubbleStyle = {
-  width: 34,
-  height: 34,
-  borderRadius: 999,
+  width: "34px",
+  height: "34px",
+  borderRadius: "999px",
   backgroundColor: "#4f7cff",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   fontWeight: 700,
-  marginBottom: 14,
+  marginBottom: "14px",
 };
 
 const primaryButtonStyle = {
   padding: "16px 22px",
-  borderRadius: 12,
+  borderRadius: "12px",
   border: "none",
   backgroundColor: "#4f7cff",
   color: "white",
   fontWeight: 700,
-  fontSize: 16,
+  fontSize: "16px",
   cursor: "pointer",
 };
 
 const secondaryButtonStyle = {
   padding: "10px 14px",
-  borderRadius: 10,
-  border: "1px solid rgba(255,255,255,.12)",
+  borderRadius: "10px",
+  border: "1px solid rgba(255,255,255,0.12)",
   backgroundColor: "transparent",
   color: "#dfe7f7",
   fontWeight: 700,
-  fontSize: 13,
+  fontSize: "13px",
   cursor: "pointer",
 };
 
 const miniCloseButtonStyle = {
-  width: 30,
-  height: 30,
-  borderRadius: 10,
-  border: "1px solid rgba(255,255,255,.10)",
+  width: "30px",
+  height: "30px",
+  borderRadius: "10px",
+  border: "1px solid rgba(255,255,255,0.10)",
   backgroundColor: "transparent",
   color: "#dfe7f7",
   fontWeight: 700,
-  fontSize: 14,
+  fontSize: "14px",
   cursor: "pointer",
 };
