@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import NavigationMenu from "./pages/NavigationMenu";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
 const DEMO_QUERY_CHIPS = ["AWS migration", "engineer", "senior"];
@@ -476,11 +477,15 @@ export default function App() {
               }}
             />
             <div style={logoTaglineStyle}>
-              Better job matching, built on signals
+              Better job matching, built on signals <span style={logoMetaDividerStyle}>—</span>{" "}
+              <span style={logoPageNameStyle}>Home</span>
             </div>
           </div>
 
-          <button style={topButtonStyle}>Interactive Preview</button>
+          <div style={headerActionsStyle}>
+            <button style={topButtonStyle}>Interactive Preview</button>
+            <NavigationMenu />
+          </div>
         </header>
 
         <section className="allira-hero-grid" style={heroSectionStyle}>
@@ -867,7 +872,21 @@ const logoTaglineStyle = {
   fontSize: 11,
   color: "#8ea0c2",
   marginTop: 4,
+  marginLeft: 12,
   letterSpacing: 0.3,
+};
+
+const logoMetaDividerStyle = {
+  color: "#8ea0c2",
+  marginLeft: 8,
+};
+
+const logoPageNameStyle = {
+  color: "#9fb0cf",
+  fontSize: 12,
+  textTransform: "uppercase",
+  letterSpacing: 0.6,
+  fontWeight: 700,
 };
 
 const topButtonStyle = {
@@ -878,6 +897,12 @@ const topButtonStyle = {
   padding: "10px 16px",
   cursor: "pointer",
   fontSize: 14,
+};
+
+const headerActionsStyle = {
+  display: "flex",
+  alignItems: "center",
+  gap: 12,
 };
 
 const heroSectionStyle = {
