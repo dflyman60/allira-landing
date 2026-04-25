@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import SeoPageHeader from "./SeoPageHeader";
 import SeoMatchDemo from "./SeoMatchDemo";
 
@@ -6,6 +7,14 @@ const JOB_CATEGORY = "aws_solutions_architect";
 export default function AwsSolutionsArchitectJobs() {
   return (
     <div style={pageStyle}>
+      <Helmet>
+        <title>AWS Solutions Architect Jobs | Cloud Architecture Roles</title>
+        <meta
+          name="description"
+          content="Explore AWS Solutions Architect jobs focused on system design, scalability, and cloud architecture. Find roles that match your architecture experience."
+        />
+      </Helmet>
+
       <div style={containerStyle}>
         {/* HERO */}
         <section style={heroStyle}>

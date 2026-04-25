@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import SeoPageHeader from "./SeoPageHeader";
 import SeoMatchDemo from "./SeoMatchDemo";
 
@@ -6,6 +7,14 @@ const JOB_CATEGORY = "cloud_engineer";
 export default function CloudEngineerJobs() {
   return (
     <div style={pageStyle}>
+      <Helmet>
+        <title>Cloud Engineer Jobs | AWS, Platform & Infrastructure Roles</title>
+        <meta
+          name="description"
+          content="Find cloud engineer jobs across AWS, infrastructure, and platform engineering. Discover roles aligned with your real cloud experience."
+        />
+      </Helmet>
+
       <div style={containerStyle}>
         {/* HERO */}
         <section style={heroStyle}>

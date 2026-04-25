@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import SeoPageHeader from "./SeoPageHeader";
 import SeoMatchDemo from "./SeoMatchDemo";
 
@@ -6,6 +7,14 @@ const JOB_CATEGORY = "devops";
 export default function DevOpsJobs() {
   return (
     <div style={pageStyle}>
+      <Helmet>
+        <title>DevOps Jobs | CI/CD, Automation & Cloud Engineering Roles</title>
+        <meta
+          name="description"
+          content="Explore DevOps jobs focused on CI/CD, automation, and cloud infrastructure. Find roles that match your DevOps and platform experience."
+        />
+      </Helmet>
+
       <div style={containerStyle}>
         {/* HERO */}
         <section style={heroStyle}>

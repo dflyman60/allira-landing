@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import SeoPageHeader from "./SeoPageHeader";
 import SeoMatchDemo from "./SeoMatchDemo";
 
@@ -6,6 +7,14 @@ const JOB_CATEGORY = "infrastructure_engineer";
 export default function InfrastructureEngineerJobs() {
   return (
     <div style={pageStyle}>
+      <Helmet>
+        <title>Infrastructure Engineer Jobs | Cloud & Systems Roles</title>
+        <meta
+          name="description"
+          content="Explore infrastructure engineer jobs across cloud, systems, and infrastructure as code. Find roles that match your infrastructure experience."
+        />
+      </Helmet>
+
       <div style={containerStyle}>
         {/* HERO */}
         <section style={heroStyle}>

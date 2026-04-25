@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import SeoPageHeader from "./SeoPageHeader";
 import SeoMatchDemo from "./SeoMatchDemo";
 
@@ -6,6 +7,14 @@ const JOB_CATEGORY = "platform_engineer";
 export default function PlatformEngineerJobs() {
   return (
     <div style={pageStyle}>
+      <Helmet>
+        <title>Platform Engineer Jobs | Internal Platform & Kubernetes Roles</title>
+        <meta
+          name="description"
+          content="Find platform engineering jobs focused on Kubernetes, internal platforms, and developer experience. Discover roles aligned to modern platform engineering."
+        />
+      </Helmet>
+
       <div style={containerStyle}>
         {/* HERO */}
         <section style={heroStyle}>

@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import SeoPageHeader from "./SeoPageHeader";
 import SeoMatchDemo from "./SeoMatchDemo";
 
@@ -6,6 +7,14 @@ const JOB_CATEGORY = "aws_migration";
 export default function AwsMigrationJobs() {
   return (
     <div style={pageStyle}>
+      <Helmet>
+        <title>AWS Migration Jobs | Cloud Modernization & Migration Roles</title>
+        <meta
+          name="description"
+          content="Find AWS migration jobs across application, data, and cloud modernization. Discover roles aligned with real migration experience and infrastructure transformation."
+        />
+      </Helmet>
+
       <div style={containerStyle}>
         {/* HERO */}
         <section style={heroStyle}>

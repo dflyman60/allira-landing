@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import App from "./App";
 import Admin from "./Admin";
 import AwsMigrationJobs from "./pages/AwsMigrationJobs";
@@ -13,20 +14,22 @@ import AwsJobs from "./pages/AwsJobs";
 
 export default function AppRouter() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/aws-migration-jobs" element={<AwsMigrationJobs />} />
-        <Route path="/cloud-engineer-jobs" element={<CloudEngineerJobs />} />
-        <Route path="/devops-jobs" element={<DevOpsJobs />} />
-        <Route path="/platform-engineer-jobs" element={<PlatformEngineerJobs />} />
-        <Route path="/aws-solutions-architect-jobs" element={<AwsSolutionsArchitectJobs />} />
-        <Route path="/infrastructure-engineer-jobs" element={<InfrastructureEngineerJobs />} />
-        <Route path="/site-reliability-engineer-jobs" element={<SiteReliabilityEngineerJobs />} />
-        <Route path="/cloud-migration-jobs" element={<CloudMigrationJobs />} />
-        <Route path="/aws-jobs" element={<AwsJobs />} />
-      </Routes>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/aws-migration-jobs" element={<AwsMigrationJobs />} />
+          <Route path="/cloud-engineer-jobs" element={<CloudEngineerJobs />} />
+          <Route path="/devops-jobs" element={<DevOpsJobs />} />
+          <Route path="/platform-engineer-jobs" element={<PlatformEngineerJobs />} />
+          <Route path="/aws-solutions-architect-jobs" element={<AwsSolutionsArchitectJobs />} />
+          <Route path="/infrastructure-engineer-jobs" element={<InfrastructureEngineerJobs />} />
+          <Route path="/site-reliability-engineer-jobs" element={<SiteReliabilityEngineerJobs />} />
+          <Route path="/cloud-migration-jobs" element={<CloudMigrationJobs />} />
+          <Route path="/aws-jobs" element={<AwsJobs />} />
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }

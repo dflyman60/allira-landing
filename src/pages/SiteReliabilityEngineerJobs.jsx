@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import SeoPageHeader from "./SeoPageHeader";
 import SeoMatchDemo from "./SeoMatchDemo";
 
@@ -6,6 +7,14 @@ const JOB_CATEGORY = "sre";
 export default function SiteReliabilityEngineerJobs() {
   return (
     <div style={pageStyle}>
+      <Helmet>
+        <title>Site Reliability Engineer Jobs | SRE & Cloud Reliability Roles</title>
+        <meta
+          name="description"
+          content="Find SRE jobs focused on reliability, observability, and cloud operations. Discover roles aligned to your site reliability engineering experience."
+        />
+      </Helmet>
+
       <div style={containerStyle}>
         {/* HERO */}
         <section style={heroStyle}>

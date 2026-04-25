@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import NavigationMenu from "./pages/NavigationMenu";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
@@ -433,6 +434,14 @@ export default function App() {
 
   return (
     <div style={pageStyle}>
+      <Helmet>
+        <title>Allira | Signal-Based Job Matching for Cloud Engineers</title>
+        <meta
+          name="description"
+          content="Find cloud and AWS jobs that actually match your experience. Allira uses signal-based matching to surface relevant roles across migration, DevOps, and platform engineering."
+        />
+      </Helmet>
+
       <style>
         {`
           @keyframes fadeSlideIn {
