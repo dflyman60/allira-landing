@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SeoHead from "../components/SeoHead";
 import SeoPageHeader from "./SeoPageHeader";
 import SeoMatchDemo from "./SeoMatchDemo";
 
@@ -26,13 +26,10 @@ const JOB_CATEGORY = "aws_general";
 export default function AwsJobs() {
   return (
     <div style={pageStyle}>
-      <Helmet>
-        <title>AWS Jobs | Find Cloud Roles That Match Your Experience</title>
-        <meta
-          name="description"
-          content="Explore AWS jobs across migration, DevOps, platform engineering, and architecture. Find roles aligned to your real cloud experience with signal-based matching."
-        />
-      </Helmet>
+      <SeoHead
+        title="AWS Jobs | Find Cloud Roles That Match Your Experience"
+        description="Explore AWS jobs across migration, DevOps, platform engineering, and architecture. Find roles aligned to your real cloud experience with signal-based matching."
+      />
 
       <div style={containerStyle}>
         {/* HERO */}

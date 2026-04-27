@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SeoHead from "../components/SeoHead";
 import SeoPageHeader from "./SeoPageHeader";
 import SeoMatchDemo from "./SeoMatchDemo";
 
@@ -7,13 +7,10 @@ const JOB_CATEGORY = "cloud_migration";
 export default function CloudMigrationJobs() {
   return (
     <div style={pageStyle}>
-      <Helmet>
-        <title>Cloud Migration Jobs | Application & Data Migration Roles</title>
-        <meta
-          name="description"
-          content="Explore cloud migration jobs across application, database, and modernization efforts. Find roles aligned with your migration experience."
-        />
-      </Helmet>
+      <SeoHead
+        title="Cloud Migration Jobs | Application & Data Migration Roles"
+        description="Explore cloud migration jobs across application, database, and modernization efforts. Find roles aligned with your migration experience."
+      />
 
       <div style={containerStyle}>
         {/* HERO */}

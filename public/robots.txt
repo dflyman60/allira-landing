@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://allira.io/sitemap.xml
+Sitemap: https://www.allira.io/sitemap.xml
