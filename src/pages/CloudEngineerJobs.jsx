@@ -8,8 +8,8 @@ export default function CloudEngineerJobs() {
   return (
     <div style={pageStyle}>
       <SeoHead
-        title="Cloud Engineer Jobs | AWS, Platform & Infrastructure Roles"
-        description="Find cloud engineer jobs across AWS, infrastructure, and platform engineering. Discover roles aligned with your real cloud experience."
+        title="Cloud Engineer Jobs That Match Your Experience | AWS, DevOps, Infrastructure | Allira"
+        description="Find cloud engineer jobs across AWS, infrastructure, platform engineering, and DevOps using signal-based matching to surface more relevant roles."
       />
 
       <div style={containerStyle}>
@@ -18,13 +18,36 @@ export default function CloudEngineerJobs() {
           <SeoPageHeader pageName="Cloud Engineer Jobs" />
 
           <h1 style={titleStyle}>
-            Find cloud engineer jobs that match your real experience.
+            Find Cloud Engineer Jobs That Match Your Experience
           </h1>
 
           <p style={leadStyle}>
+            Find cloud engineer jobs across AWS, cloud infrastructure, platform
+            engineering, DevOps, and cloud operations roles.
+          </p>
+
+          <p style={leadStyle}>
             Allira helps cloud engineers, AWS specialists, platform engineers,
-            DevOps professionals, and cloud operations teams find roles aligned
-            to real infrastructure and engineering signals.
+            DevOps professionals, and cloud operations teams find roles aligned to
+            real infrastructure and engineering signals.
+          </p>
+
+          <p style={leadStyle}>
+            Cloud engineer job listings can vary widely even when they use the
+            same titles. One role may focus on infrastructure automation, while
+            another may center on platform engineering, DevOps pipelines, or
+            reliability work.
+          </p>
+
+          <p style={leadStyle}>
+            This page helps you explore cloud engineer jobs by role type, tools,
+            and responsibilities so you can find positions that better match your
+            experience.
+          </p>
+
+          <p style={leadStyle}>
+            Browse cloud engineer jobs updated regularly across AWS,
+            infrastructure, DevOps, and platform engineering roles.
           </p>
 
         </section>
@@ -50,7 +73,13 @@ export default function CloudEngineerJobs() {
         <SeoMatchDemo pageKey="cloudEngineer" jobCategory={JOB_CATEGORY} />
 
         <section style={sectionStyle}>
-          <h2 style={h2Style}>Common cloud engineer roles</h2>
+          <h2 style={h2Style}>Common Cloud Engineer Job Roles</h2>
+
+          <p style={textStyle}>
+            These cloud engineer roles help you understand how responsibilities
+            vary across infrastructure, platform engineering, DevOps, and cloud
+            operations.
+          </p>
 
           <ul style={listStyle}>
             <li>Cloud Engineer</li>
@@ -66,6 +95,11 @@ export default function CloudEngineerJobs() {
         <section style={sectionStyle}>
           <h2 style={h2Style}>Key skills for cloud engineer jobs</h2>
 
+          <p style={textStyle}>
+            Cloud engineer roles require a mix of infrastructure, cloud services,
+            and automation skills.
+          </p>
+
           <ul style={listStyle}>
             <li>AWS services like EC2, S3, IAM, Lambda, ECS, and EKS</li>
             <li>Infrastructure as Code with Terraform or CloudFormation</li>
@@ -79,15 +113,20 @@ export default function CloudEngineerJobs() {
           <h2 style={h2Style}>Why signal-based matching matters</h2>
 
           <p style={textStyle}>
-            Cloud engineer job titles can be noisy. A role might say DevOps,
-            platform, infrastructure, SRE, or cloud operations while still
-            matching the same underlying AWS cloud engineering experience.
+            Cloud engineer job search is difficult because job titles often hide
+            very different responsibilities.
           </p>
 
           <p style={textStyle}>
-            Allira uses signal-based matching to look at responsibilities,
-            technologies, and patterns in the role so you can find cloud
-            engineer jobs that fit your actual background.
+            A role might be labeled DevOps, platform engineering, infrastructure,
+            SRE, or cloud operations while still matching the same underlying
+            cloud engineering experience.
+          </p>
+
+          <p style={textStyle}>
+            Allira uses signal-based matching to analyze responsibilities,
+            technologies, and patterns so you can find cloud engineer jobs that
+            match your actual background.
           </p>
         </section>
 
@@ -125,6 +164,12 @@ export default function CloudEngineerJobs() {
 
         {/* CTA */}
         <section style={ctaStyle}>
+          <p style={textStyle}>
+            Whether you're looking for AWS cloud engineer roles, infrastructure
+            positions, or platform engineering work, Allira helps you find
+            opportunities that better align with your technical background.
+          </p>
+
           <h2 style={h2Style}>Start finding better matches</h2>
           <p style={ctaTextStyle}>
             Use Allira’s signal-based matching to discover cloud engineer jobs
@@ -133,7 +178,7 @@ export default function CloudEngineerJobs() {
           </p>
 
           <a href="/" style={buttonStyle}>
-            Try the Allira preview
+            Explore Cloud Engineer Jobs That Match Your Experience
           </a>
         </section>
       </div>

@@ -27,8 +27,8 @@ export default function AwsJobs() {
   return (
     <div style={pageStyle}>
       <SeoHead
-        title="AWS Jobs | Find Cloud Roles That Match Your Experience"
-        description="Explore AWS jobs across migration, DevOps, platform engineering, and architecture. Find roles aligned to your real cloud experience with signal-based matching."
+        title="AWS Jobs That Match Your Cloud Experience | Allira"
+        description="Find AWS jobs across cloud architecture, DevOps, migration, platform engineering, infrastructure, and reliability roles using signal-based matching."
       />
 
       <div style={containerStyle}>
@@ -37,14 +37,34 @@ export default function AwsJobs() {
           <SeoPageHeader pageName="AWS Jobs" />
 
           <h1 style={titleStyle}>
-            Find AWS jobs that actually match your cloud experience
+            Find AWS Jobs That Match Your Cloud Experience
           </h1>
 
           <p style={leadStyle}>
-            AWS jobs vary widely across migration, architecture, DevOps,
-            infrastructure, platform, and reliability roles. Allira helps you
-            search by real cloud signals instead of relying on broad job titles
-            alone.
+            Find AWS jobs across cloud architecture, DevOps, migration,
+            infrastructure, platform engineering, and reliability roles.
+          </p>
+
+          <p style={leadStyle}>
+            Allira helps you discover more relevant AWS jobs by analyzing real
+            cloud signals instead of relying only on job titles and keywords.
+          </p>
+
+          <p style={leadStyle}>
+            AWS job listings can vary widely even when they use the same titles.
+            A “cloud engineer” role may focus on infrastructure automation,
+            migration, DevOps pipelines, Kubernetes platforms, or reliability
+            engineering.
+          </p>
+
+          <p style={leadStyle}>
+            This page helps you explore AWS jobs by role type and responsibility
+            so you can find positions that better match your actual cloud
+            experience.
+          </p>
+
+          <p style={leadStyle}>
+            Browse AWS jobs updated regularly across cloud engineering, DevOps, and architecture.
           </p>
 
         </section>
@@ -53,11 +73,15 @@ export default function AwsJobs() {
 
         {/* SUPPORTED PATHS */}
         <section style={sectionStyle}>
-          <h2 style={h2Style}>Supported AWS job paths</h2>
+          <h2 style={h2Style}>Explore AWS Job Categories</h2>
 
           <p style={textStyle}>
             Use these focused pages to explore the AWS and cloud role families
             Allira is built to understand.
+          </p>
+
+          <p style={textStyle}>Browse AWS jobs by role type to focus on specific cloud roles 
+             instead of broad job titles.
           </p>
 
           <div style={pathGridStyle}>
@@ -85,34 +109,44 @@ export default function AwsJobs() {
         <section style={sectionStyle}>
           <h2 style={h2Style}>Why AWS job search is difficult</h2>
 
-          <p style={textStyle}>
-            AWS job titles are often too broad. A role labeled cloud engineer
-            might be focused on migration, infrastructure automation, operations,
-            architecture, Kubernetes platforms, or reliability work.
-          </p>
-
-          <p style={textStyle}>
-            Traditional job boards rely heavily on keywords, which makes it easy
-            to miss good roles or waste time on jobs that only loosely match
-            your cloud background.
-          </p>
+          <ul style={supportingBulletListStyle}>
+            <li style={supportingBulletItemStyle}>
+              AWS job search is difficult because job titles are inconsistent and
+              often misleading.
+            </li>
+            <li style={supportingBulletItemStyle}>
+              AWS job titles are often too broad. A role labeled cloud engineer
+              might be focused on migration, infrastructure automation, operations,
+              architecture, Kubernetes platforms, or reliability work.
+            </li>
+            <li style={supportingBulletItemStyle}>
+              Traditional job boards rely heavily on keywords, which makes it easy
+              to miss good roles or waste time on jobs that only loosely match
+              your cloud background.
+            </li>
+          </ul>
         </section>
 
         <section style={sectionStyle}>
           <h2 style={h2Style}>How signal-based matching helps</h2>
 
-          <p style={textStyle}>
-            Allira looks for deeper signals: AWS services, migration
-            responsibilities, architecture patterns, Terraform, CI/CD,
-            Kubernetes, observability, platform engineering, and cloud
-            operations work.
-          </p>
-
-          <p style={textStyle}>
-            That signal-based approach helps distinguish AWS migration jobs from
-            AWS architect jobs, DevOps jobs, platform engineer jobs,
-            infrastructure jobs, and SRE roles.
-          </p>
+          <ul style={supportingBulletListStyle}>
+            <li style={supportingBulletItemStyle}>
+              Allira improves AWS job search by focusing on deeper technical
+              signals rather than surface-level keywords.
+            </li>
+            <li style={supportingBulletItemStyle}>
+              Allira looks for deeper signals: AWS services, migration
+              responsibilities, architecture patterns, Terraform, CI/CD,
+              Kubernetes, observability, platform engineering, and cloud
+              operations work.
+            </li>
+            <li style={supportingBulletItemStyle}>
+              That signal-based approach helps distinguish AWS migration jobs from
+              AWS architect jobs, DevOps jobs, platform engineer jobs,
+              infrastructure jobs, and SRE roles.
+            </li>
+          </ul>
         </section>
 
         {/* FAQ */}
@@ -120,7 +154,7 @@ export default function AwsJobs() {
           <h2 style={h2Style}>FAQ</h2>
 
           <div style={faqItemStyle}>
-            <strong>What types of AWS jobs does Allira support?</strong>
+            <strong>What types of AWS jobs can I find on Allira?</strong>
             <p style={textStyle}>
               Allira supports AWS-related cloud roles across migration,
               architecture, cloud engineering, DevOps, platform engineering,
@@ -158,6 +192,13 @@ export default function AwsJobs() {
 
         {/* CTA */}
         <section style={ctaStyle}>
+          <p style={textStyle}>
+            Whether you're looking for AWS migration jobs, cloud architect roles,
+            DevOps positions, or platform engineering work, Allira helps you find
+            opportunities that better align with your technical background and
+            experience.
+          </p>
+
           <h2 style={h2Style}>Start finding better matches</h2>
           <p style={ctaTextStyle}>
             Use Allira’s signal-based matching to discover AWS jobs aligned with
@@ -166,7 +207,7 @@ export default function AwsJobs() {
           </p>
 
           <a href="/" style={buttonStyle}>
-            Try the Allira preview
+            Explore AWS Jobs That Match Your Experience
           </a>
         </section>
       </div>
@@ -230,6 +271,21 @@ const leadStyle = {
   color: "#b8c3d9",
   fontSize: "18px",
   marginBottom: "20px",
+};
+
+const supportingBulletListStyle = {
+  color: "#cdd7ea",
+  lineHeight: 1.6,
+  marginTop: "0",
+  marginBottom: "10px",
+  paddingLeft: "28px",
+  listStyleType: "disc",
+  listStylePosition: "outside",
+};
+
+const supportingBulletItemStyle = {
+  marginBottom: "10px",
+  paddingLeft: "6px",
 };
 
 const buttonStyle = {

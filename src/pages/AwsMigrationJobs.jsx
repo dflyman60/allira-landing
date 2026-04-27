@@ -8,8 +8,8 @@ export default function AwsMigrationJobs() {
   return (
     <div style={pageStyle}>
       <SeoHead
-        title="AWS Migration Jobs | Cloud Modernization & Migration Roles"
-        description="Find AWS migration jobs across application, data, and cloud modernization. Discover roles aligned with real migration experience and infrastructure transformation."
+        title="AWS Migration Jobs That Match Your Experience | Cloud Transformation | Allira"
+        description="Find AWS migration jobs across cloud transformation, infrastructure migration, and modernization roles using signal-based matching."
       />
 
       <div style={containerStyle}>
@@ -18,13 +18,35 @@ export default function AwsMigrationJobs() {
           <SeoPageHeader pageName="AWS Migration Jobs" />
 
           <h1 style={titleStyle}>
-            Find AWS migration jobs that actually fit your experience.
+            Find AWS Migration Jobs That Match Your Experience
           </h1>
 
           <p style={leadStyle}>
-            Allira helps AWS cloud engineers, migration specialists, platform engineers,
-            and DevOps professionals discover roles aligned to real experience —
-            not just keyword matches.
+            Find AWS migration jobs across cloud transformation, infrastructure
+            migration, and modernization roles.
+          </p>
+
+          <p style={leadStyle}>
+            Allira helps engineers and architects find AWS migration roles aligned to
+            real migration responsibilities, cloud transformation work, and
+            infrastructure modernization signals.
+          </p>
+
+          <p style={leadStyle}>
+            AWS migration roles can vary significantly. Some focus on lift-and-shift
+            migrations, while others involve re-architecture, data migration,
+            cloud-native transformation, or modernization strategies.
+          </p>
+
+          <p style={leadStyle}>
+            This page helps you explore AWS migration jobs by migration type,
+            responsibilities, and technologies so you can find roles that better match
+            your experience.
+          </p>
+
+          <p style={leadStyle}>
+            Browse AWS migration jobs updated regularly across cloud transformation,
+            replatforming, and modernization roles.
           </p>
 
         </section>
@@ -54,6 +76,11 @@ export default function AwsMigrationJobs() {
         <section style={sectionStyle}>
           <h2 style={h2Style}>Common AWS migration roles</h2>
 
+          <p style={textStyle}>
+            These roles help distinguish between lift-and-shift, replatforming, and
+            cloud-native transformation work.
+          </p>
+
           <ul style={listStyle}>
             <li>AWS Migration Engineer</li>
             <li>Cloud Migration Specialist</li>
@@ -66,6 +93,11 @@ export default function AwsMigrationJobs() {
         <section style={sectionStyle}>
           <h2 style={h2Style}>Key skills for AWS migration jobs</h2>
 
+          <p style={textStyle}>
+            AWS migration roles require experience in cloud transformation,
+            infrastructure migration, and modernization strategies.
+          </p>
+
           <ul style={listStyle}>
             <li>AWS services (EC2, S3, RDS, Lambda)</li>
             <li>Infrastructure as Code (Terraform, CloudFormation)</li>
@@ -76,18 +108,22 @@ export default function AwsMigrationJobs() {
         </section>
 
         <section style={sectionStyle}>
-          <h2 style={h2Style}>Why job matching matters for migration roles</h2>
+          <h2 style={h2Style}>Why signal-based matching matters</h2>
 
           <p style={textStyle}>
-            Many AWS migration jobs don’t clearly state migration responsibilities
-            in the title. Instead, the actual work is hidden inside the job
-            description. That makes traditional keyword-based job search unreliable.
+            AWS migration job search is difficult because migration responsibilities
+            vary widely between roles.
           </p>
 
           <p style={textStyle}>
-            Allira uses signal-based matching to identify roles with real migration
-            responsibilities, helping you find positions that align with your
-            experience in cloud transformation and infrastructure modernization.
+            Some positions focus on infrastructure movement, while others involve
+            application refactoring, data migration, or full cloud transformation.
+          </p>
+
+          <p style={textStyle}>
+            Allira uses signal-based matching to analyze migration patterns,
+            technologies, and responsibilities so you can find roles that match your
+            actual experience.
           </p>
         </section>
 
@@ -123,6 +159,12 @@ export default function AwsMigrationJobs() {
 
         {/* CTA */}
         <section style={ctaStyle}>
+          <p style={textStyle}>
+            Whether you're focused on lift-and-shift migrations, modernization, or
+            cloud-native transformation, Allira helps you find AWS migration jobs
+            aligned with your background.
+          </p>
+
           <h2 style={h2Style}>Start finding better matches</h2>
           <p style={ctaTextStyle}>
             Use Allira’s signal-based matching to discover AWS migration roles
@@ -130,7 +172,7 @@ export default function AwsMigrationJobs() {
           </p>
 
           <a href="/" style={buttonStyle}>
-            Try the Allira preview
+            Explore AWS Migration Jobs That Match Your Experience
           </a>
         </section>
 

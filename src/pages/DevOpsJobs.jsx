@@ -8,8 +8,8 @@ export default function DevOpsJobs() {
   return (
     <div style={pageStyle}>
       <SeoHead
-        title="DevOps Jobs | CI/CD, Automation & Cloud Engineering Roles"
-        description="Explore DevOps jobs focused on CI/CD, automation, and cloud infrastructure. Find roles that match your DevOps and platform experience."
+        title="DevOps Jobs That Match Your Experience | AWS, CI/CD, Platform | Allira"
+        description="Find DevOps jobs across AWS, CI/CD, platform engineering, and cloud operations using signal-based matching to surface more relevant roles."
       />
 
       <div style={containerStyle}>
@@ -18,13 +18,36 @@ export default function DevOpsJobs() {
           <SeoPageHeader pageName="DevOps Jobs" />
 
           <h1 style={titleStyle}>
-            Find DevOps jobs that match your cloud and automation experience.
+            Find DevOps Jobs That Match Your Cloud and Automation Experience
           </h1>
+
+          <p style={leadStyle}>
+            Find DevOps jobs across cloud automation, CI/CD, platform
+            engineering, infrastructure, and cloud operations.
+          </p>
 
           <p style={leadStyle}>
             Allira helps DevOps engineers, AWS DevOps specialists, platform
             engineers, and cloud operations professionals find roles aligned to
             real infrastructure, automation, and delivery signals.
+          </p>
+
+          <p style={leadStyle}>
+            DevOps job listings can vary widely even when they use the same
+            titles. One role may focus on infrastructure as code and AWS
+            automation, while another may center on CI/CD pipelines, Kubernetes
+            platforms, or reliability engineering.
+          </p>
+
+          <p style={leadStyle}>
+            This page helps you explore DevOps jobs by role type, tools, and
+            responsibilities so you can find positions that better match your
+            experience.
+          </p>
+
+          <p style={leadStyle}>
+            Browse DevOps jobs updated regularly across cloud automation, CI/CD,
+            and platform engineering roles.
           </p>
 
         </section>
@@ -34,9 +57,9 @@ export default function DevOpsJobs() {
           <h2 style={h2Style}>What are DevOps jobs?</h2>
 
           <p style={textStyle}>
-            DevOps jobs focus on improving how software and infrastructure are
-            built, deployed, automated, monitored, and operated. These roles
-            often sit between cloud infrastructure, CI/CD engineering, platform
+            DevOps jobs focus on automating and improving how software and
+            infrastructure are built, deployed, and operated. These roles often
+            sit between cloud infrastructure, CI/CD engineering, platform
             engineering, and cloud operations.
           </p>
 
@@ -50,7 +73,13 @@ export default function DevOpsJobs() {
         <SeoMatchDemo pageKey="devops" jobCategory={JOB_CATEGORY} />
 
         <section style={sectionStyle}>
-          <h2 style={h2Style}>Common DevOps roles</h2>
+          <h2 style={h2Style}>Common DevOps Job Roles</h2>
+
+          <p style={textStyle}>
+            These DevOps job roles help you understand how responsibilities
+            differ across cloud automation, platform engineering, and
+            operations.
+          </p>
 
           <ul style={listStyle}>
             <li>DevOps Engineer</li>
@@ -66,6 +95,11 @@ export default function DevOpsJobs() {
         <section style={sectionStyle}>
           <h2 style={h2Style}>Key skills for DevOps jobs</h2>
 
+          <p style={textStyle}>
+            DevOps roles require a mix of cloud infrastructure, automation, and
+            delivery skills.
+          </p>
+
           <ul style={listStyle}>
             <li>CI/CD engineering with GitHub Actions, Jenkins, GitLab, or similar tools</li>
             <li>Terraform, CloudFormation, and infrastructure as code</li>
@@ -78,18 +112,22 @@ export default function DevOpsJobs() {
         <section style={sectionStyle}>
           <h2 style={h2Style}>Why signal-based matching matters for DevOps roles</h2>
 
-          <p style={textStyle}>
-            DevOps job titles can hide very different responsibilities. One role
-            may focus on AWS automation and Terraform, while another may lean
-            toward release management, SRE, cloud operations, or platform
-            engineering.
-          </p>
-
-          <p style={textStyle}>
-            Allira uses signal-based matching to look beyond the title and
-            identify the actual tools, responsibilities, and cloud operations
-            patterns that match your DevOps experience.
-          </p>
+          <ul style={listStyle}>
+            <li>
+              DevOps job search is difficult because job titles often hide very
+              different responsibilities.
+            </li>
+            <li>
+              One role may focus on AWS automation and Terraform, while another may
+              lean toward release management, SRE, cloud operations, or platform
+              engineering.
+            </li>
+            <li>
+              Allira uses signal-based matching to look beyond the title and
+              identify the actual tools, responsibilities, and cloud operations
+              patterns that match your DevOps experience.
+            </li>
+          </ul>
         </section>
 
         {/* FAQ */}
@@ -126,6 +164,13 @@ export default function DevOpsJobs() {
 
         {/* CTA */}
         <section style={ctaStyle}>
+          <p style={textStyle}>
+            Whether you're looking for AWS DevOps engineer roles, CI/CD-focused
+            positions, or platform engineering work, Allira helps you find
+            opportunities that better align with your technical background and
+            automation experience.
+          </p>
+
           <h2 style={h2Style}>Start finding better matches</h2>
           <p style={ctaTextStyle}>
             Use Allira’s signal-based matching to discover DevOps jobs aligned
@@ -134,7 +179,7 @@ export default function DevOpsJobs() {
           </p>
 
           <a href="/" style={buttonStyle}>
-            Try the Allira preview
+            Explore DevOps Jobs That Match Your Experience
           </a>
         </section>
       </div>

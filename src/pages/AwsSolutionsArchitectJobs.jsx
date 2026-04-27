@@ -8,8 +8,8 @@ export default function AwsSolutionsArchitectJobs() {
   return (
     <div style={pageStyle}>
       <SeoHead
-        title="AWS Solutions Architect Jobs | Cloud Architecture Roles"
-        description="Explore AWS Solutions Architect jobs focused on system design, scalability, and cloud architecture. Find roles that match your architecture experience."
+        title="AWS Solutions Architect Jobs That Match Your Experience | Allira"
+        description="Find AWS Solutions Architect jobs across cloud architecture, system design, and platform roles using signal-based matching."
       />
 
       <div style={containerStyle}>
@@ -18,13 +18,36 @@ export default function AwsSolutionsArchitectJobs() {
           <SeoPageHeader pageName="AWS Solutions Architect Jobs" />
 
           <h1 style={titleStyle}>
-            Find AWS Solutions Architect jobs that match your architecture experience
+            Find AWS Solutions Architect Jobs That Match Your Experience
           </h1>
 
           <p style={leadStyle}>
-            Allira helps AWS Solutions Architects, cloud architects, and
-            architecture-focused engineers find roles aligned to system design,
-            scalability, reliability, and cloud architecture patterns.
+            Find AWS Solutions Architect jobs across cloud architecture, system
+            design, and AWS platform roles.
+          </p>
+
+          <p style={leadStyle}>
+            Allira helps solutions architects, cloud architects, and senior AWS
+            engineers find roles aligned to real architecture responsibilities,
+            design patterns, and cloud decision-making signals.
+          </p>
+
+          <p style={leadStyle}>
+            AWS Solutions Architect roles can vary widely. One role may focus on
+            high-level system design and stakeholder collaboration, while another
+            may involve hands-on infrastructure, DevOps integration, or migration
+            architecture.
+          </p>
+
+          <p style={leadStyle}>
+            This page helps you explore AWS Solutions Architect jobs by
+            architecture focus, responsibilities, and technologies so you can
+            find roles that better match your experience.
+          </p>
+
+          <p style={leadStyle}>
+            Browse AWS Solutions Architect jobs updated regularly across
+            architecture, system design, and cloud platform roles.
           </p>
 
         </section>
@@ -51,7 +74,12 @@ export default function AwsSolutionsArchitectJobs() {
         <SeoMatchDemo pageKey="awsArchitect" jobCategory={JOB_CATEGORY} />
 
         <section style={sectionStyle}>
-          <h2 style={h2Style}>Common responsibilities of solutions architects</h2>
+          <h2 style={h2Style}>Common AWS Solutions Architect roles</h2>
+
+          <p style={textStyle}>
+            These roles help distinguish between hands-on architecture, enterprise
+            design, and cloud platform leadership responsibilities.
+          </p>
 
           <ul style={listStyle}>
             <li>Design AWS architectures for applications, data, and platforms</li>
@@ -64,6 +92,11 @@ export default function AwsSolutionsArchitectJobs() {
 
         <section style={sectionStyle}>
           <h2 style={h2Style}>Key skills for AWS Solutions Architects</h2>
+
+          <p style={textStyle}>
+            AWS Solutions Architect roles require a mix of architecture design,
+            cloud services knowledge, and technical leadership.
+          </p>
 
           <ul style={listStyle}>
             <li>AWS services across compute, storage, networking, identity, and data</li>
@@ -93,20 +126,23 @@ export default function AwsSolutionsArchitectJobs() {
         </section>
 
         <section style={sectionStyle}>
-          <h2 style={h2Style}>Why signal-based matching matters for architect roles</h2>
+          <h2 style={h2Style}>Why signal-based matching matters</h2>
 
           <p style={textStyle}>
-            AWS Solutions Architect job titles can overlap with cloud engineer,
-            platform engineer, DevOps, and infrastructure roles. The important
-            signals are often in the responsibilities: architecture ownership,
-            design patterns, stakeholder guidance, scalability, reliability, and
-            system-level decision making.
+            AWS Solutions Architect job search is difficult because titles often
+            hide very different levels of responsibility.
           </p>
 
           <p style={textStyle}>
-            Allira uses signal-based matching to identify architecture-focused
-            roles that fit your actual AWS architecture experience, not just
-            roles that happen to mention cloud or AWS.
+            Some roles focus on enterprise architecture and design patterns, while
+            others involve hands-on AWS implementation, DevOps integration, or
+            migration planning.
+          </p>
+
+          <p style={textStyle}>
+            Allira uses signal-based matching to analyze responsibilities,
+            technologies, and architecture patterns so you can find roles that
+            match your actual experience.
           </p>
         </section>
 
@@ -153,6 +189,12 @@ export default function AwsSolutionsArchitectJobs() {
 
         {/* CTA */}
         <section style={ctaStyle}>
+          <p style={textStyle}>
+            Whether you're looking for enterprise architecture roles, hands-on AWS
+            solutions work, or cloud platform design positions, Allira helps you
+            find opportunities aligned with your background.
+          </p>
+
           <h2 style={h2Style}>Start finding better matches</h2>
           <p style={ctaTextStyle}>
             Use Allira’s signal-based matching to discover AWS Solutions
@@ -161,7 +203,7 @@ export default function AwsSolutionsArchitectJobs() {
           </p>
 
           <a href="/" style={buttonStyle}>
-            Try the Allira preview
+            Explore AWS Solutions Architect Jobs That Match Your Experience
           </a>
         </section>
       </div>
