@@ -525,15 +525,20 @@ export default function App() {
               />
                 <button
                   onClick={() => {
-                    setShowResults(true);
-                    window.gtag?.("event", "find_matches_click", {
-                      event_category: "engagement",
-                      event_label: "hero_search",
+                    setShowResults((prev) => {
+                      const next = !prev;
+                      if (next) {
+                        window.gtag?.("event", "find_matches_click", {
+                          event_category: "engagement",
+                          event_label: "hero_search",
+                        });
+                      }
+                      return next;
                     });
                   }}
                   style={primaryButtonStyle}
                 >
-                  Find Matches
+                  Find Matches {showResults ? "↓" : "↑"}
                 </button>
             </div>
 
