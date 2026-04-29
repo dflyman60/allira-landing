@@ -10,6 +10,7 @@ export function trackFindMatchesClick(sourcePage) {
       page_path: window.location.pathname,
       page_title: document.title,
       button_label: "Find Matches",
+      debug_mode: true,
     });
   }
 }
