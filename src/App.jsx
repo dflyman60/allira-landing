@@ -489,7 +489,7 @@ export default function App() {
           </div>
 
           <div style={headerActionsStyle}>
-            <button style={topButtonStyle}>Interactive Preview</button>
+            <button style={topButtonStyle}>Early access — results improving with real use</button>
             <NavigationMenu />
           </div>
         </header>
