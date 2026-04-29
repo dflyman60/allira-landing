@@ -2,8 +2,6 @@ import SeoHead from "../components/SeoHead";
 import SeoPageHeader from "./SeoPageHeader";
 import SeoMatchDemo from "./SeoMatchDemo";
 
-const JOB_CATEGORY = "sre";
-
 export default function SiteReliabilityEngineerJobs() {
   return (
     <div style={pageStyle}>
@@ -47,7 +45,7 @@ export default function SiteReliabilityEngineerJobs() {
           </p>
         </section>
 
-        <SeoMatchDemo pageKey="sre" jobCategory={JOB_CATEGORY} />
+        <SeoMatchDemo pageKey="sre" sourcePage="site_reliability_engineer_jobs" />
 
         <section style={sectionStyle}>
           <h2 style={h2Style}>Common SRE responsibilities</h2>

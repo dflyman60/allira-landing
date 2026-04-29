@@ -69,7 +69,7 @@ export default function AwsJobs() {
 
         </section>
 
-        <SeoMatchDemo pageKey="awsJobs" jobCategory={JOB_CATEGORY} />
+        <SeoMatchDemo pageKey="awsJobs" sourcePage="aws_jobs" />
 
         {/* SUPPORTED PATHS */}
         <section style={sectionStyle}>

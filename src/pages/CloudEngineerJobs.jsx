@@ -2,8 +2,6 @@ import SeoHead from "../components/SeoHead";
 import SeoPageHeader from "./SeoPageHeader";
 import SeoMatchDemo from "./SeoMatchDemo";
 
-const JOB_CATEGORY = "cloud_engineer";
-
 export default function CloudEngineerJobs() {
   return (
     <div style={pageStyle}>
@@ -70,7 +68,7 @@ export default function CloudEngineerJobs() {
           </p>
         </section>
 
-        <SeoMatchDemo pageKey="cloudEngineer" jobCategory={JOB_CATEGORY} />
+        <SeoMatchDemo pageKey="cloudEngineer" sourcePage="cloud_engineer_jobs" />
 
         <section style={sectionStyle}>
           <h2 style={h2Style}>Common Cloud Engineer Job Roles</h2>

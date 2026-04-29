@@ -2,8 +2,6 @@ import SeoHead from "../components/SeoHead";
 import SeoPageHeader from "./SeoPageHeader";
 import SeoMatchDemo from "./SeoMatchDemo";
 
-const JOB_CATEGORY = "devops";
-
 export default function DevOpsJobs() {
   return (
     <div style={pageStyle}>
@@ -70,7 +68,7 @@ export default function DevOpsJobs() {
           </p>
         </section>
 
-        <SeoMatchDemo pageKey="devops" jobCategory={JOB_CATEGORY} />
+        <SeoMatchDemo pageKey="devops" sourcePage="devops_jobs" />
 
         <section style={sectionStyle}>
           <h2 style={h2Style}>Common DevOps Job Roles</h2>

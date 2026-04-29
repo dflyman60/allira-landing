@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { trackFindMatchesClick } from "../lib/analytics.js";
 
 const DEMO_MATCHES_BY_PAGE = {
   awsJobs: [
@@ -284,19 +285,15 @@ function SeoDemoCard({ match }) {
   );
 }
 
-export default function SeoMatchDemo({ pageKey, jobCategory }) {
+export default function SeoMatchDemo({ pageKey, sourcePage }) {
   const [showMatches, setShowMatches] = useState(false);
   const matches = DEMO_MATCHES_BY_PAGE[pageKey] || [];
 
   function handleFindMatches() {
     setShowMatches((current) => {
       const next = !current;
-      if (next) {
-        window.gtag?.("event", "seo_find_matches_click", {
-          event_category: "engagement",
-          event_label: window.location.pathname,
-          job_category: jobCategory,
-        });
+      if (next && sourcePage) {
+        trackFindMatchesClick(sourcePage);
       }
       return next;
     });

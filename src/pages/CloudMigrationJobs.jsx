@@ -2,8 +2,6 @@ import SeoHead from "../components/SeoHead";
 import SeoPageHeader from "./SeoPageHeader";
 import SeoMatchDemo from "./SeoMatchDemo";
 
-const JOB_CATEGORY = "cloud_migration";
-
 export default function CloudMigrationJobs() {
   return (
     <div style={pageStyle}>
@@ -48,7 +46,7 @@ export default function CloudMigrationJobs() {
           </p>
         </section>
 
-        <SeoMatchDemo pageKey="cloudMigration" jobCategory={JOB_CATEGORY} />
+        <SeoMatchDemo pageKey="cloudMigration" sourcePage="cloud_migration_jobs" />
 
         <section style={sectionStyle}>
           <h2 style={h2Style}>Common cloud migration roles</h2>

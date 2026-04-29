@@ -2,8 +2,6 @@ import SeoHead from "../components/SeoHead";
 import SeoPageHeader from "./SeoPageHeader";
 import SeoMatchDemo from "./SeoMatchDemo";
 
-const JOB_CATEGORY = "aws_solutions_architect";
-
 export default function AwsSolutionsArchitectJobs() {
   return (
     <div style={pageStyle}>
@@ -71,7 +69,7 @@ export default function AwsSolutionsArchitectJobs() {
           </p>
         </section>
 
-        <SeoMatchDemo pageKey="awsArchitect" jobCategory={JOB_CATEGORY} />
+        <SeoMatchDemo pageKey="awsArchitect" sourcePage="aws_solutions_architect_jobs" />
 
         <section style={sectionStyle}>
           <h2 style={h2Style}>Common AWS Solutions Architect roles</h2>

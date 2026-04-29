@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { trackFindMatchesClick } from "./lib/analytics.js";
 
 const API_BASE =
   import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
@@ -371,6 +372,7 @@ export default function App() {
   }, [showResults]);
 
   function handleFindMatches() {
+    trackFindMatchesClick("homepage");
     setShowResults(true);
   }
 

@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import SeoHead from "./components/SeoHead";
+import { trackFindMatchesClick } from "./lib/analytics.js";
 import NavigationMenu from "./pages/NavigationMenu";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
@@ -528,10 +529,7 @@ export default function App() {
                     setShowResults((prev) => {
                       const next = !prev;
                       if (next) {
-                        window.gtag?.("event", "find_matches_click", {
-                          event_category: "engagement",
-                          event_label: "hero_search",
-                        });
+                        trackFindMatchesClick("homepage");
                       }
                       return next;
                     });

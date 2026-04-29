@@ -2,8 +2,6 @@ import SeoHead from "../components/SeoHead";
 import SeoPageHeader from "./SeoPageHeader";
 import SeoMatchDemo from "./SeoMatchDemo";
 
-const JOB_CATEGORY = "platform_engineer";
-
 export default function PlatformEngineerJobs() {
   return (
     <div style={pageStyle}>
@@ -48,7 +46,7 @@ export default function PlatformEngineerJobs() {
           </p>
         </section>
 
-        <SeoMatchDemo pageKey="platformEngineer" jobCategory={JOB_CATEGORY} />
+        <SeoMatchDemo pageKey="platformEngineer" sourcePage="platform_engineer_jobs" />
 
         <section style={sectionStyle}>
           <h2 style={h2Style}>Common platform engineering roles</h2>

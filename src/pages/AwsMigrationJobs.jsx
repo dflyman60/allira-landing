@@ -2,8 +2,6 @@ import SeoHead from "../components/SeoHead";
 import SeoPageHeader from "./SeoPageHeader";
 import SeoMatchDemo from "./SeoMatchDemo";
 
-const JOB_CATEGORY = "aws_migration";
-
 export default function AwsMigrationJobs() {
   return (
     <div style={pageStyle}>
@@ -71,7 +69,7 @@ export default function AwsMigrationJobs() {
           </p>
         </section>
 
-        <SeoMatchDemo pageKey="awsMigration" jobCategory={JOB_CATEGORY} />
+        <SeoMatchDemo pageKey="awsMigration" sourcePage="aws_migration_jobs" />
 
         <section style={sectionStyle}>
           <h2 style={h2Style}>Common AWS migration roles</h2>
