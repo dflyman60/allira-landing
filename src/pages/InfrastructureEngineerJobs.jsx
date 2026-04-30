@@ -161,7 +161,7 @@ export default function InfrastructureEngineerJobs() {
           </p>
 
           <a href="/" style={buttonStyle}>
-            Try the Allira preview
+            Explore Infrastructure Engineer Jobs That Match Your Experience
           </a>
         </section>
       </div>

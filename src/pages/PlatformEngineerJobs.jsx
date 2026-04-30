@@ -161,7 +161,7 @@ export default function PlatformEngineerJobs() {
           </p>
 
           <a href="/" style={buttonStyle}>
-            Try the Allira preview
+            Explore Platform Engineer Jobs That Match Your Experience
           </a>
         </section>
       </div>

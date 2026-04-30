@@ -158,7 +158,7 @@ export default function CloudMigrationJobs() {
           </p>
 
           <a href="/" style={buttonStyle}>
-            Try the Allira preview
+            Explore Cloud Migration Jobs That Match Your Experience
           </a>
         </section>
       </div>

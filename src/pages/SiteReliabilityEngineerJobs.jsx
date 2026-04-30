@@ -156,7 +156,7 @@ export default function SiteReliabilityEngineerJobs() {
           </p>
 
           <a href="/" style={buttonStyle}>
-            Try the Allira preview
+            Explore Site Reliability Engineer Jobs That Match Your Experience
           </a>
         </section>
       </div>
